@@ -1,0 +1,211 @@
+#query {
+  background: #dfe2f1; }
+
+ul {
+  margin: 0px !important;
+  padding-left: 0px; }
+
+li {
+  display: inline;
+  list-style: none;
+  padding-left: 10px !important; }
+
+a {
+  text-decoration: none;
+  color: black; }
+
+a:visited {
+  color: black; }
+
+a.active {
+  color: #cc0001; }
+
+a:hover {
+  color: #cc0001 !important;
+  background-color: transparent !important; }
+
+input[type=submit] {
+  border: none; }
+
+.caption {
+  background-color: #ccc;
+  opacity: .6;
+  color: black;
+  height: 40px;
+  top: -40px;
+  position: relative; }
+
+body {
+  background: url(../images/header.png) #cccccc repeat-x;
+  color: #58595b; }
+
+#header {
+  height: 90px; }
+  #header .icon {
+    height: 100%;
+    background: url(../images/logo.png) no-repeat; }
+  #header .navigation li {
+    display: inline;
+    padding: 15px; }
+    #header .navigation li a {
+      font-size: 20px; }
+
+#main {
+  background: white; }
+
+ul, ol {
+  margin: 0px;
+  padding-left: 0px; }
+
+.spinner {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-left: -50px;
+  /* half width of the spinner gif */
+  margin-top: -50px;
+  /* half height of the spinner gif */
+  text-align: center;
+  z-index: 1234;
+  overflow: auto;
+  width: 100px;
+  /* width of the spinner gif */
+  height: 102px;
+  /*hight of the spinner gif +2px to fix IE8 issue */ }
+
+a {
+  text-decoration: none;
+  color: #616265; }
+  a:hover {
+    background-color: transparent;
+    color: #282828; }
+  a.active {
+    color: #f68a33; }
+
+#fancybox-outer {
+  color: #979797; }
+
+.hidden {
+  display: none; }
+
+#navigation {
+  min-height: 450px; }
+  #navigation a {
+    font-size: 20px; }
+  #navigation ul li {
+    line-height: 35px; }
+
+.f0 {
+  font-size: .25em !important; }
+
+.f1 {
+  font-size: .5em !important; }
+
+.f2 {
+  font-size: .75em !important; }
+
+.f3 {
+  font-size: 1em !important; }
+
+.f4 {
+  font-size: 1.25em !important; }
+
+.f5 {
+  font-size: 1.5em !important; }
+
+.f6 {
+  font-size: 1.75em; }
+
+.bold {
+  font-weight: bold; }
+
+.border-right {
+  border-right: 1px dotted #777;
+  margin-right: -1px; }
+
+.border-left {
+  border-left: 1px dotted #777;
+  margin-left: 1px; }
+
+.border-bottom {
+  border-bottom: 1px dotted #777; }
+
+.border-top {
+  border-top: 1px dotted #777; }
+
+.align-center {
+  text-align: center; }
+
+.align-left {
+  text-align: left; }
+
+.align-right {
+  text-align: right; }
+
+.current {
+  color: #f68a33; }
+
+ul.sortable {
+  margin: 0px;
+  padding: 0px; }
+  ul.sortable li {
+    float: left; }
+
+.placeholder {
+  background: #507db4; }
+
+.border {
+  border: 1px dotted #777;
+  margin-right: -1px;
+  margin-left: 1px; }
+
+.isotope-item {
+  z-index: 2; }
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1; }
+
+.isotope,
+.isotope .isotope-item {
+  /* change duration value to whatever you like */
+  -webkit-transition-duration: 0.8s;
+  -moz-transition-duration: 0.8s;
+  transition-duration: 0.8s; }
+
+.isotope {
+  -webkit-transition-property: height, width;
+  -moz-transition-property: height, width;
+  transition-property: height, width; }
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+  -moz-transition-property: -moz-transform, opacity;
+  transition-property: transform, opacity; }
+
+/* the overlayed element */
+.apple_overlay {
+  /* initially overlay is hidden */
+  display: none;
+  /* growing background image */
+  background-image: url(../images/overlay/transparent.png);
+  /* 
+  	width after the growing animation finishes
+  	height is automatically calculated
+  */
+  width: 640px;
+  /* some padding to layout nested elements nicely  */
+  padding: 35px;
+  /* a little styling */
+  font-size: 11px; }
+
+/* default close button positioned on upper right corner */
+.apple_overlay .close {
+  background-image: url(../images/overlay/close.png);
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
+  height: 35px;
+  width: 35px; }
