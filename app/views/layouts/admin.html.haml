@@ -1,0 +1,42 @@
+!!!
+%html
+  %head
+    %title Crimson Bikes
+    = stylesheet_link_tag "blueprint-css/blueprint/screen",'../javascripts/fancybox/jquery.fancybox-1.3.4', "jquery-ui-1.8.11.custom"
+    = stylesheet_link_tag :all, "uploadify"
+    = javascript_include_tag :defaults
+    = javascript_include_tag "jquery.dragsort-0.4.2.min", "jquery.isotope.min", "jquery-ui-1.8.11.custom.min", 'fancybox/jquery.mousewheel-3.0.4.pack.js',"jquery.tools.min.js", 'fancybox/jquery.fancybox-1.3.4.pack.js', 'jwplayer/jwplayer'
+    = include_tiny_mce_if_needed
+    = csrf_meta_tag
+    = yield :head
+    %body
+      .container
+        #header.span-22.prepend-1.append-1.last
+          .span-6=image_tag "logo.jpg", :height=>100
+          #navigation.span-16.last.bold.f3  
+            / .span-8
+            /   %ul
+            /     %li= "Welcome, #{current_user.name_first}" if user_signed_in?
+            / .span-8.last.align-right
+            /   %ul
+            /     -if user_signed_in?
+            /       %li=link_to "[ sign out ]", destroy_user_session_path
+            /     -else
+            /       %li=link_to "[ sign in ]", new_user_session_path, :class=>('active' if params[:controller] == 'devise/sessions')
+            /       %li=link_to "[ register ]", new_user_registration_path, :class=>('active' if params[:controller] == 'devise/registrations')
+            / .span-16.last.border-top.bold.f5.prepend-top.align-right
+            /   %ul
+            /     - if user_signed_in?
+            /       %li=link_to "reserve", root_path, :class=>('active' if params[:controller] == 'reservations')
+            /     - else
+            /       %li=link_to 'welcome', welcome_path, :class=>('active' if params[:controller] == "pages" && params[:action] == 'welcome')
+            /     %li=link_to 'bikes', bikes_path, :class=>('active' if params[:controller] == 'bikes')
+            /     %li=link_to 'locations', locations_path, :class=>('active' if params[:controller] == 'locations')              
+            /     %li=link_to 'about', about_path, :class=>('active' if params[:controller] == "pages" && params[:action] == "about")
+            /     -if admin_signed_in? 
+            /       %li=link_to 'admin', admin_path, :class=>('active' if params[:controller] == "admin")
+        #main.span-22.prepend-1.append-1.last.prepend-top
+          #content.span-22.last=yield
+        #footer= yield :footer
+      #loading.spinner
+        = image_tag "loader.gif"

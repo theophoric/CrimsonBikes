@@ -1,6 +1,7 @@
 class Bike
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Taggable
   
   belongs_to :location
   
@@ -9,6 +10,8 @@ class Bike
   field :name
   field :_status
   field :_identifier
+  
+  field :location
   
   
 end

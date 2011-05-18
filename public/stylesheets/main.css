@@ -36,7 +36,6 @@ input[type=submit] {
   position: relative; }
 
 body {
-  background: url(../images/header.png) #cccccc repeat-x;
   color: #58595b; }
 
 #header {
