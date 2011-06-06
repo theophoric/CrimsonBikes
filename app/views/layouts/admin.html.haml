@@ -14,27 +14,25 @@
         #header.span-22.prepend-1.append-1.last
           .span-6=image_tag "logo.jpg", :height=>100
           #navigation.span-16.last.bold.f3  
-            / .span-8
-            /   %ul
-            /     %li= "Welcome, #{current_user.name_first}" if user_signed_in?
-            / .span-8.last.align-right
-            /   %ul
-            /     -if user_signed_in?
-            /       %li=link_to "[ sign out ]", destroy_user_session_path
-            /     -else
-            /       %li=link_to "[ sign in ]", new_user_session_path, :class=>('active' if params[:controller] == 'devise/sessions')
-            /       %li=link_to "[ register ]", new_user_registration_path, :class=>('active' if params[:controller] == 'devise/registrations')
-            / .span-16.last.border-top.bold.f5.prepend-top.align-right
-            /   %ul
-            /     - if user_signed_in?
-            /       %li=link_to "reserve", root_path, :class=>('active' if params[:controller] == 'reservations')
-            /     - else
-            /       %li=link_to 'welcome', welcome_path, :class=>('active' if params[:controller] == "pages" && params[:action] == 'welcome')
-            /     %li=link_to 'bikes', bikes_path, :class=>('active' if params[:controller] == 'bikes')
-            /     %li=link_to 'locations', locations_path, :class=>('active' if params[:controller] == 'locations')              
-            /     %li=link_to 'about', about_path, :class=>('active' if params[:controller] == "pages" && params[:action] == "about")
-            /     -if admin_signed_in? 
-            /       %li=link_to 'admin', admin_path, :class=>('active' if params[:controller] == "admin")
+            .span-8
+              %ul
+                %li= "Welcome, #{current_user.name_first}" if user_signed_in?
+            .span-8.last.align-right
+              %ul
+                -if user_signed_in?
+                  %li=link_to "[ sign out ]", destroy_user_session_path
+                  - if user_signed_in? && current_user.admin?
+                    %li= link_to "user view", root_path
+                -else
+                  %li=link_to "[ sign in ]", new_user_session_path, :class=>('active' if params[:controller] == 'devise/sessions')
+                  %li=link_to "[ register ]", new_user_registration_path, :class=>('active' if params[:controller] == 'devise/registrations')
+            .span-16.last.border-top.bold.f5.prepend-top.align-right
+              %ul
+                %li=  link_to "bikes", object_manage_path("bikes")
+                %li=  link_to "locations", object_manage_path("locations")
+                %li=  link_to "users", object_manage_path("users")
+                
+
         #main.span-22.prepend-1.append-1.last.prepend-top
           #content.span-22.last=yield
         #footer= yield :footer

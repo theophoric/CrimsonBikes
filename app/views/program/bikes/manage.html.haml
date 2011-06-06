@@ -1,0 +1,10 @@
+= link_to "Add Bike", object_new_path('bike')
+%table 
+  - for bike in @objects do
+    %tr
+      %td= image_tag bike.image.url(:thumb)
+      %td= bike.name
+      %td= link_to bike.location.name, object_show_path("location", bike.location)
+      %td= bike._status
+      %td= link_to "Show", object_show_path("bike", bike)
+      %td= link_to "Edit", object_edit_path("bike", bike)

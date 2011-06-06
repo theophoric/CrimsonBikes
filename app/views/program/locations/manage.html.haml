@@ -1,0 +1,9 @@
+
+%table 
+  - for location in @objects do
+    %tr
+      %td= image_tag location.image.url(:thumb)
+      %td= location.name
+      %td= "#{location.bikes.count} bikes"
+      %td= link_to "Show", object_show_path("Location", location)
+      %td= link_to "Edit", object_edit_path("Location", location)

@@ -1,0 +1,15 @@
+
+.span-24
+  #reservation_container
+    
+  #objects_container
+    - for object in @objects do
+      %div[object]{object.filter_data}
+        = image_tag "http://crimsonbikes-development.s3.amazonaws.com/uploads/bike/image/4dd98523af632564f600001f/thumb_bike.jpeg"
+        / = image_tag object.image.url 
+      / = render 'program/bikes/bike', :locals => {:object => object}
+:javascript
+  $('#objects_container').isotope({
+  itemSelector : '.bike',
+  layoutMode : 'fitRows'
+  });

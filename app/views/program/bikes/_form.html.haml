@@ -1,0 +1,31 @@
+- object ||= @object
+- locations = Location.all.collect{|location|[location.name, location.id]}
+%ul
+  = form_for object, :url => object_create_path(object.class.inspect), :html => {:multipart => true} do |f|
+    
+    %li= f.label :name
+    %li= f.text_field :name
+    %br
+    %li= f.label :_identifier
+    %li= f.text_field :_identifier, :width => 10
+    %br
+    %li= f.label :_status
+    %li= f.select(:_status, [["Active", "active"], ["Maintenance", "maintenance"]])
+    %br
+    %ul.radio
+      %li Location
+      %li
+        - locations.each do |name, id|
+          = f.radio_button :location_id, id, :checked => (id == object.location_id ? "checked" : "unchecked")
+          = f.label "location_id_#{id}", name
+    %br
+    = f.fields_for :description do |description_fields|
+      %li= description_fields.label :description
+      %li= description_fields.text_field :description
+    %br
+    %li= f.label :image, "Image"    
+    - if object.image_filename
+      = image_tag object.image.url(:thumb)
+    %li= f.file_field :image
+    %br
+    %li= f.submit

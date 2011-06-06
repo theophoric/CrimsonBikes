@@ -8,53 +8,53 @@ $(document).ready(function(){
  	// $('.expandable').fancybox();
 
 	resetButtons();
-	// ISOTOPE
-	// var $container = $('#gallery_container')
-	// filters = {};
-	// 
-	// 
-	// // $('#filters a').click(function(){
-	// //   var selector = $(this).attr('data_filter');
-	// //   $container.isotope({ filter: selector });
-	// //   return false;
-	// // });
-	// 
-	// 
-	// 
-	// $('.filter a').click(function(){
-	//     var $this = $(this),
-	//         isoFilters = [],
-	//         prop, selector;
-	//     // store filter value in object
-	//     // i.e. filters.color = 'red'
-	//     filters[ $this.attr('data_group') ] = $this.attr('data_filter');
-	// 
-	//     for ( prop in filters ) {
-	//       isoFilters.push( filters[ prop ] )
-	//     }
-	//     selector = isoFilters.join('');
-	//     $container.isotope({ filter: selector });
-	// 
-	//     return false;
-	//   });
-	// 
-	// 
-	// 
-	// 
-	//   $('#options').find('.option-set a').click(function(){
-	//     var $this = $(this);
-	// 
-	//     // don't proceed if already selected
-	//     if ( !$this.hasClass('selected') ) {
-	//       $this.parents('.option-set').find('.selected').removeClass('selected');
-	//       $this.addClass('selected');
-	//     }
-	//   });
-	// 
-	// $(function(){
-	// 	$container : '.link'
+	ISOTOPE
+	var $container = $('#gallery_container')
+	filters = {};
+	
+	
+	// $('#filters a').click(function(){
+	//   var selector = $(this).attr('data_filter');
+	//   $container.isotope({ filter: selector });
+	//   return false;
 	// });
-	// 
+	
+	
+	
+	$('.filter a').click(function(){
+	    var $this = $(this),
+	        isoFilters = [],
+	        prop, selector;
+	    // store filter value in object
+	    // i.e. filters.color = 'red'
+	    filters[ $this.attr('data_group') ] = $this.attr('data_filter');
+	
+	    for ( prop in filters ) {
+	      isoFilters.push( filters[ prop ] )
+	    }
+	    selector = isoFilters.join('');
+	    $container.isotope({ filter: selector });
+	
+	    return false;
+	  });
+	
+	
+	
+	
+	  $('#options').find('.option-set a').click(function(){
+	    var $this = $(this);
+	
+	    // don't proceed if already selected
+	    if ( !$this.hasClass('selected') ) {
+	      $this.parents('.option-set').find('.selected').removeClass('selected');
+	      $this.addClass('selected');
+	    }
+	  });
+	
+	$(function(){
+		$container : '.link'
+	});
+	
 })
 
 function resetButtons(){

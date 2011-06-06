@@ -1,9 +1,24 @@
 Crimson2::Application.routes.draw do
   devise_for :users
+  
+  root :to => 'program#home'
+  
+  match ':_class/:_id/show'             => 'program#show'            , :as => "object_show"
+  match ':_class/index'                 => 'program#index'           , :as => "object_index"
+  match '/'                             => 'program#home'            , :as => "home"
 
-  scope "admin" do
-    
+  scope "/admin", :controller => :program do                                              
+    match ':_class/:_id/edit'             => :edit           , :as => "object_edit"
+    match ':_class/:_id/update'           => :update         , :as => "object_update"
+    match ':_class/:_id/destroy'          => :destroy        , :as => "object_destroy"
+    match ':_class/create'                => :create         , :as => "object_create"
+    match ':_class/manage'                => :manage         , :as => "object_manage"
+    match ':_class/new'                   => :new            , :as => "object_new"
+    match '/'                             => :admin          , :as => "admin"
   end
+  
+  
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
