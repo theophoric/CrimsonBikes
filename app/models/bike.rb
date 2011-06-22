@@ -6,6 +6,7 @@ class Bike
   mount_uploader :image, ImageUploader
   
   belongs_to :location
+  has_many :reservations
   
   embeds_many :timeslots
   embeds_many :notes, :as => :notable
@@ -23,22 +24,20 @@ class Bike
   # validates_uniqueness_of :_identifier
   
   def reserve(reservation)
-    for time in (reservation.start..reservation.end) do
-      timeslots << new_timeslot(:time => time, :date => reservation.date)
+    #unless timeslot.where(:time.within => [start..stop], :date => date).any?
+    
+    for time in (reservation.start..reservation.stop).to_a do
+      self.timeslots.create(:time => time, :date => reservation.date)
     end
     reservations << reservation
     save!
   end
   
   def filter_data
-    data = {}
-    for item in timeslots.today do
-      data[:timeslot_today] << "timeslot-#{item.time}, "
-    end
-    for item in timeslots.tomorrow do
-      data[:timeslot_today] << "timeslot-#{item.time}, "
-    end
+    data = {:class => []}
+    c_array = timeslots.today.collect{|t| "timeslot-#{t.time}"} + timeslots.tomorrow.collect{|t| "timeslot-#{t.time + 48}"}
     data[:location] = location.name.gsub(" ", "_").downcase if location
+    data[:class] = c_array.join(" ")
     description.attributes.each do |key, value|
       data[key.to_sym] = value
     end
@@ -70,7 +69,7 @@ class Timeslot
   field :time
   
   validates_presence_of :date, :time
-  validates_uniqueness_of :time, :scope => :date
+  # validates_uniqueness_of :time
   
   index :date
   

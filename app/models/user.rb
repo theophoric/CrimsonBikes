@@ -3,6 +3,8 @@ class User
 
   mount_uploader :avatar, ImageUploader
   
+  has_many :reservations
+  
   embeds_many :notes, :as => :notable
   
   # Include default devise modules. Others available are:
@@ -19,6 +21,8 @@ class User
   field :phone
   
   field :admin, :default => false
+  
+  field :processed, :default => false
   
   index :name_last
   index :email

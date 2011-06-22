@@ -1,6 +1,6 @@
 class ProgramController < ApplicationController
   
-  before_filter :authenticate_admin!, :except => [:index, :show, :home]
+  before_filter :authenticate_admin!, :except => [:index, :show, :home, :account, :reserve]
   layout 'admin', :except => [:index, :show, :home]
 
   
@@ -9,7 +9,7 @@ class ProgramController < ApplicationController
   end
   
   def index
-    _class = params[:_class]
+    _class = params[:_class] || "Bike"
     @objects = eval(_class.titleize.singularize).all
     render "program/#{_class.tableize}/index", :layout => 'application'
   end
@@ -48,6 +48,37 @@ class ProgramController < ApplicationController
   end
   
   def admin
+    
+  end
+  
+  def reserve
+    @reservation = Reservation.new(params[:reservation])
+    day_offset = params[:day_offset].to_i
+    hour    = params[:hour].to_i
+    minute_offset = params[:minute_offset].to_i
+    hour_offset = params[:hour_offset].to_i
+    duration  = params[:duration].to_i
+    
+    start = day_offset + hour + minute_offset + hour_offset
+    finish = start + duration
+    
+    puts start.to_s
+    puts finish.to_s
+    
+    date = Time.now + start.hours
+    @reservation.start = start
+    @reservation.stop = finish
+    @reservation.date = date
+    @reservation.user_id = current_user._id    
+    @reservation.save
+
+    @bike = Bike.find(@reservation.bike._id)
+    @bike.reserve(@reservation)
+    flash[:notice] = "Reservation Successful"
+    redirect_to :action => :index
+  end
+  
+  def account
     
   end
   

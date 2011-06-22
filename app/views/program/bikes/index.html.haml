@@ -1,15 +1,35 @@
 
 .span-24
   #reservation_container
-    
+    = render "program/reservations/form"
+  #reservation_time  
+  #filters_container
+    %ul.radio
+      %li Location
+      %li#location_filters
+        = label_tag "location_filter_", "All"
+        = radio_button_tag "location_filter", "", :checked => "checked"
+        - %w{ leverett cabot kirkland }.each do |location|
+          = label_tag "location_filter_#{location}", location.titleize
+          = radio_button_tag "location_filter", "#{location}", :test => "test"
   #objects_container
     - for object in @objects do
-      %div[object]{object.filter_data}
-        = image_tag "http://crimsonbikes-development.s3.amazonaws.com/uploads/bike/image/4dd98523af632564f600001f/thumb_bike.jpeg"
+      %div.leverett[object]{object.filter_data}
+        = link_to "#", :onclick => "$('#new_reservation').html('#{escape_javascript(render :partial => 'program/bikes/bike_reservation', :locals => {:bike => object})}');$('#new_reservation_link').click();" do
+          = image_tag "http://crimsonbikes-development.s3.amazonaws.com/uploads/bike/image/4dd98523af632564f600001f/thumb_bike.jpeg"
+          
         / = image_tag object.image.url 
       / = render 'program/bikes/bike', :locals => {:object => object}
+.hidden
+  #new_reservation
+  = link_to "New Reservation", '#new_reservation',:id => "new_reservation_link"
 :javascript
-  $('#objects_container').isotope({
-  itemSelector : '.bike',
-  layoutMode : 'fitRows'
+  $(function(){
+  $('#new_reservation_link').fancybox();
+  filter_dates();
+  $('#objects_container').isotope({});
+  $('#location_filters input').change(function(){
+  var selector = ($(this).val() == "" ? "*" : "[location=" + $(this).val() + "]");
+  $('#objects_container').isotope({filter : selector});
+  });
   });

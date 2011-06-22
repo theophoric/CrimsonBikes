@@ -8,54 +8,33 @@ $(document).ready(function(){
  	// $('.expandable').fancybox();
 
 	resetButtons();
-	ISOTOPE
-	var $container = $('#gallery_container')
-	filters = {};
-	
-	
-	// $('#filters a').click(function(){
-	//   var selector = $(this).attr('data_filter');
-	//   $container.isotope({ filter: selector });
-	//   return false;
-	// });
-	
-	
-	
-	$('.filter a').click(function(){
-	    var $this = $(this),
-	        isoFilters = [],
-	        prop, selector;
-	    // store filter value in object
-	    // i.e. filters.color = 'red'
-	    filters[ $this.attr('data_group') ] = $this.attr('data_filter');
-	
-	    for ( prop in filters ) {
-	      isoFilters.push( filters[ prop ] )
-	    }
-	    selector = isoFilters.join('');
-	    $container.isotope({ filter: selector });
-	
-	    return false;
-	  });
-	
-	
-	
-	
-	  $('#options').find('.option-set a').click(function(){
-	    var $this = $(this);
-	
-	    // don't proceed if already selected
-	    if ( !$this.hasClass('selected') ) {
-	      $this.parents('.option-set').find('.selected').removeClass('selected');
-	      $this.addClass('selected');
-	    }
-	  });
-	
-	$(function(){
-		$container : '.link'
-	});
+
 	
 })
+// 
+
+function filter_dates(){
+	var day_offset		=	parseInt($('input[name=day_offset]:checked').val());
+	var hour			=	parseInt($('input[name=hour]:checked').val());
+	var minute_offset	=	parseInt($('input[name=minute_offset]:checked').val());
+	var hour_offset		=	parseInt($('input[name=hour_offset]:checked').val());
+	var duration		= 	parseInt($('select[name=duration]').val());
+	
+	var start 	= day_offset + hour + minute_offset + hour_offset;
+	var end 	= start + duration;
+	
+	var $container = $("#objects_container");
+	
+	var isoFilters = []
+	
+	for(i = start; i < end; i++){
+		isoFilters.push(".timeslot-" + i);
+	}
+	var selector = ":not(" + isoFilters.join("") + ")";
+	
+	alert(selector);
+	$container.isotope({filter : selector});
+}
 
 function resetButtons(){
 	$('input').button();

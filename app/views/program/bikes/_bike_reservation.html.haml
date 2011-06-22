@@ -1,0 +1,6 @@
+- bike ||= @bike
+.span-12
+  .span-12.title.align-center= "New Reservation for #{bike._identifier}"
+  .span-4= image_tag bike.image.url, :width => 300
+  .span-8.last
+  = link_to_function "Reserve this bike", "$('#reservation_bike_id').val('#{bike._id}');$('#reservation_form').submit();"

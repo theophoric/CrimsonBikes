@@ -17,6 +17,10 @@ a:hover{color:#cc0001 !important;background-color:transparent !important;}
 input[type=submit]{border:none;}
 .caption{background-color:#ccc;opacity:.6;color:black;height:40px;top:-40px;position:relative;}
 
+.title{
+	font-size:24px;
+	font-weight:200;
+}
 
 @mixin rounded($radius){
 	-moz-border-radius: $radius;
