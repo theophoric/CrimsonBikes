@@ -31,6 +31,5 @@ gem 'carrierwave'
 gem "mongoid-paperclip", :require => "mongoid_paperclip"
 gem 'fastercsv'
 gem 'kaminari'
-gem 'mongoid-history'
 gem 'rest-client'
 gem 'gmaps4rails'
