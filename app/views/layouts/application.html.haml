@@ -21,8 +21,8 @@
               %ul
                 -if user_signed_in?
                   %li=link_to "[ sign out ]", destroy_user_session_path
-                  / - if user_signed_in? && current_user.admin?
-                  /   %li= link_to "admin view", admin_path
+                  - if admin_user?
+                    %li= link_to "admin view", admin_path
                 -else
                   %li=link_to "[ sign in ]", new_user_session_path, :class=>('active' if params[:controller] == 'devise/sessions')
                   %li=link_to "[ register ]", new_user_registration_path, :class=>('active' if params[:controller] == 'devise/registrations')

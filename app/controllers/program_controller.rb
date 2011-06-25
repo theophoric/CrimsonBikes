@@ -65,7 +65,7 @@ class ProgramController < ApplicationController
     puts start.to_s
     puts finish.to_s
     
-    date = Time.now + start.hours
+    date = Time.now.midnight + start.hours
     @reservation.start = start
     @reservation.stop = finish
     @reservation.date = date
@@ -75,7 +75,7 @@ class ProgramController < ApplicationController
     @bike = Bike.find(@reservation.bike._id)
     @bike.reserve(@reservation)
     flash[:notice] = "Reservation Successful"
-    redirect_to :action => :index
+    redirect_to object_index_path("bikes")
   end
   
   def account

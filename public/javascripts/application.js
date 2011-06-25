@@ -32,7 +32,6 @@ function filter_dates(){
 	}
 	var selector = ":not(" + isoFilters.join("") + ")";
 	
-	alert(selector);
 	$container.isotope({filter : selector});
 }
 
