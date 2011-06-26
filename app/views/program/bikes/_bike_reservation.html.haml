@@ -1,6 +1,28 @@
 - bike ||= @bike
 .span-12
-  .span-12.title.align-center= "New Reservation for #{bike._identifier}"
-  .span-4= image_tag bike.image.url, :width => 300
-  .span-8.last
-  = link_to_function "Reserve this bike", "$('#reservation_bike_id').val('#{bike._id}');$('#reservation_form').submit();"
+  .span-6= image_tag bike.image.url, :width => 225
+  .span-6.last
+    .span-6
+      %table
+        %tr
+          %td.bold Name
+          %td= bike.name
+          
+        %tr
+          %td.bold Identifier
+          %td= bike._identifier
+      
+        %tr
+          %td.bold Location
+          %td= bike.location.name.titleize
+  
+        %tr
+          %td.bold Model
+          %td= bike._model.titleize
+
+        %tr
+          %td.bold
+          %td
+          
+    
+    .align-center= link_to_function "Confirm Reservation", "$('#reservation_bike_id').val('#{bike._id}');$('#reservation_form').submit();", :class => "link"

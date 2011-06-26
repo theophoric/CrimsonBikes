@@ -14,6 +14,7 @@ Crimson2::Application.routes.draw do
   match 'user/account' => 'program#account', :as => "account"
 
   scope "/admin", :controller => :program do                                              
+    match '/'                             => :admin          , :as => "admin"
     match ':_class/:_id/edit'             => :edit           , :as => "object_edit"
     match ':_class/:_id/update'           => :update         , :as => "object_update"
     match ':_class/:_id/destroy'          => :destroy        , :as => "object_destroy"

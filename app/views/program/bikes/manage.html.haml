@@ -1,4 +1,5 @@
 = link_to "Add Bike", object_new_path('bike')
+= paginate @objects
 %table 
   - for bike in @objects do
     %tr

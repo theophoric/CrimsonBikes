@@ -43,4 +43,7 @@ class User
     update_attribute(:confirmed_at, Time.now)
   end
   
+  def fullname
+    "#{name_last}, #{name_first}"
+  end
 end

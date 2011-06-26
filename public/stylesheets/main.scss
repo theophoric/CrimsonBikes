@@ -18,7 +18,7 @@ input[type=submit]{border:none;}
 .caption{background-color:#ccc;opacity:.6;color:black;height:40px;top:-40px;position:relative;}
 
 .title{
-	font-size:24px;
+	font-size:20px;
 	font-weight:200;
 }
 
@@ -29,6 +29,11 @@ input[type=submit]{border:none;}
 
 body{
 	color:$black;
+	text-align:left;
+	background:#f5f5f5 url(../images/background.png) repeat-x;
+}
+ul{
+	text-align:left;
 }
 
 #header{
@@ -37,19 +42,20 @@ body{
 		height:100%;
 		background: url(../images/logo.png) no-repeat;
 	}
-	.navigation{
-		
-		li{
-			display:inline;
-			padding:15px;
-			a{
-				font-size:20px;
+	#navigation{
+		ul{
+			text-align:right;
+			li{
+				display:inline;
+				padding:15px;
+				a{
+					font-size:20px;
+				}
 			}
 		}
 	}
 }
 #main{
-	background:white;
 }
 
 ul, ol{
@@ -81,9 +87,7 @@ a{
 		background-color:transparent;
 		color:#282828;
 	}
-	&.active{
-		color:$orange;
-	}
+
 }
 #fancybox-outer{
 	color:#979797;
@@ -93,17 +97,7 @@ a{
 .hidden{
 	display:none;
 }
-#navigation{
-	a{
-		font-size:20px;
-	}
-	ul{
-		li{
-			line-height:35px;
-		}
-	}
-	min-height:450px;
-}
+
 @mixin side_border($side) {
 	border-#{$side}:1px dotted #777;
 }
@@ -222,4 +216,143 @@ ul.sortable{
 	cursor:pointer;
 	height:35px;
 	width:35px;
+}
+
+
+#objects_container{
+	.bike{
+		border:1px solid #ccc;
+		@include rounded(4px);
+		background-color:white;
+		min-height:75px;
+		.photo{
+			padding:5px;
+		}
+	}
+}
+#filters_container{
+	min-height:600px;
+	margin-right:-1px;
+	border-right:1px solid #ccc;
+	.header{
+		text-align:center;
+		font-size:24px;
+		border-bottom:1px solid #ccc;
+		margin-bottom:10px;
+	}
+	.subheader{
+		font-size:18px;
+		text-align:center;
+		font-weight:300;
+		border-bottom:1px dotted #d7d7d7;
+		padding-top:15px;
+		margin-bottom:5px;
+	}
+	.filter{
+		a{
+			width:100px;
+		}
+	}	
+}
+.reservation_form_wrapper{
+	.header{
+		text-align:center;
+		font-size:24px;
+		border-bottom:1px solid #ccc;
+		margin-bottom:5px;
+	}
+	#time_picker{
+		position:relative;
+		top:-30px;
+	}
+
+	#reservation_table{
+		background:white;
+		table{
+			tr{
+				&.quarters{
+					line-height:10px;
+					td{
+						border-right:1px solid #ccc;
+						&.first{
+							border-left:1px solid #ccc; 
+						}
+					}
+				}
+				&.hours{
+					td{
+						border-top: 1px solid #ccc;
+						border-bottom: 1px solid #ccc;
+						height:15px;
+						background: transparent;
+						z-index: 99;
+						&.even{
+							border-left: 1px solid #ccc;
+						}
+						&.odd{
+							border-left: 1px dotted #ccc;
+						}
+						&.final{
+							border-right: 1px solid #ccc;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+#bike_table{
+	background:white;
+	table{
+		table-layout:fixed;
+
+		tr{
+			&.days{
+				border-top: 1px solid #ccc;
+				border-bottom: 1px solid #ccc;
+				
+				td{
+					text-align:center;
+					border-right: 1px solid #ccc;
+					&.first{
+						border-left:1px solid #ccc; 
+					}
+				}
+			}
+			&.quarters{
+				line-height:10px;
+				td{
+					border-right:1px solid #ccc;
+					&.first{
+						border-left:1px solid #ccc; 
+					}
+				}
+			}
+			&.hours{
+				td{
+					border-top: 1px solid #ccc;
+					border-bottom: 1px solid #ccc;
+					height:15px;
+					background: transparent;
+					z-index: 99;
+					&.even{
+						border-left: 1px solid #ccc;
+					}
+					&.odd{
+						border-left: 1px dotted #ccc;
+					}
+					&.final{
+						border-right: 1px solid #ccc;
+					}
+					&.avail{
+						
+					}
+					&.unavail{
+						background:#d7d7d7;
+					}
+				}
+			}
+		}
+	}
 }

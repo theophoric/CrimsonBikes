@@ -1,0 +1,12 @@
+- objects ||= @objects
+%table
+  - for object in objects do
+    %tr[object]
+      %td= object.fullname
+      %td= object.email
+      %td= object.confirmed_at
+      %td= "#{object.processed ? "processed" : "pending"}"
+      %td= object.last_sign_in_at
+      %td= "#{object.admin ? "admin" : "default"}"
+      %td= link_to "Show", object_show_path("user", object)
+  

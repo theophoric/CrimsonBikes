@@ -36,25 +36,29 @@ input[type=submit] {
   position: relative; }
 
 .title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 200; }
 
 body {
-  color: #58595b; }
+  color: #58595b;
+  text-align: left;
+  background: #f5f5f5 url(../images/background.png) repeat-x; }
+
+ul {
+  text-align: left; }
 
 #header {
   height: 90px; }
   #header .icon {
     height: 100%;
     background: url(../images/logo.png) no-repeat; }
-  #header .navigation li {
-    display: inline;
-    padding: 15px; }
-    #header .navigation li a {
-      font-size: 20px; }
-
-#main {
-  background: white; }
+  #header #navigation ul {
+    text-align: right; }
+    #header #navigation ul li {
+      display: inline;
+      padding: 15px; }
+      #header #navigation ul li a {
+        font-size: 20px; }
 
 ul, ol {
   margin: 0px;
@@ -83,21 +87,12 @@ a {
   a:hover {
     background-color: transparent;
     color: #282828; }
-  a.active {
-    color: #f68a33; }
 
 #fancybox-outer {
   color: #979797; }
 
 .hidden {
   display: none; }
-
-#navigation {
-  min-height: 450px; }
-  #navigation a {
-    font-size: 20px; }
-  #navigation ul li {
-    line-height: 35px; }
 
 .f0 {
   font-size: .25em !important; }
@@ -212,3 +207,93 @@ ul.sortable {
   cursor: pointer;
   height: 35px;
   width: 35px; }
+
+#objects_container .bike {
+  border: 1px solid #ccc;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  background-color: white;
+  min-height: 75px; }
+  #objects_container .bike .photo {
+    padding: 5px; }
+
+#filters_container {
+  min-height: 600px;
+  margin-right: -1px;
+  border-right: 1px solid #ccc; }
+  #filters_container .header {
+    text-align: center;
+    font-size: 24px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px; }
+  #filters_container .subheader {
+    font-size: 18px;
+    text-align: center;
+    font-weight: 300;
+    border-bottom: 1px dotted #d7d7d7;
+    padding-top: 15px;
+    margin-bottom: 5px; }
+  #filters_container .filter a {
+    width: 100px; }
+
+.reservation_form_wrapper .header {
+  text-align: center;
+  font-size: 24px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 5px; }
+.reservation_form_wrapper #time_picker {
+  position: relative;
+  top: -30px; }
+.reservation_form_wrapper #reservation_table {
+  background: white; }
+  .reservation_form_wrapper #reservation_table table tr.quarters {
+    line-height: 10px; }
+    .reservation_form_wrapper #reservation_table table tr.quarters td {
+      border-right: 1px solid #ccc; }
+      .reservation_form_wrapper #reservation_table table tr.quarters td.first {
+        border-left: 1px solid #ccc; }
+  .reservation_form_wrapper #reservation_table table tr.hours td {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    height: 15px;
+    background: transparent;
+    z-index: 99; }
+    .reservation_form_wrapper #reservation_table table tr.hours td.even {
+      border-left: 1px solid #ccc; }
+    .reservation_form_wrapper #reservation_table table tr.hours td.odd {
+      border-left: 1px dotted #ccc; }
+    .reservation_form_wrapper #reservation_table table tr.hours td.final {
+      border-right: 1px solid #ccc; }
+
+#bike_table {
+  background: white; }
+  #bike_table table {
+    table-layout: fixed; }
+    #bike_table table tr.days {
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc; }
+      #bike_table table tr.days td {
+        text-align: center;
+        border-right: 1px solid #ccc; }
+        #bike_table table tr.days td.first {
+          border-left: 1px solid #ccc; }
+    #bike_table table tr.quarters {
+      line-height: 10px; }
+      #bike_table table tr.quarters td {
+        border-right: 1px solid #ccc; }
+        #bike_table table tr.quarters td.first {
+          border-left: 1px solid #ccc; }
+    #bike_table table tr.hours td {
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      height: 15px;
+      background: transparent;
+      z-index: 99; }
+      #bike_table table tr.hours td.even {
+        border-left: 1px solid #ccc; }
+      #bike_table table tr.hours td.odd {
+        border-left: 1px dotted #ccc; }
+      #bike_table table tr.hours td.final {
+        border-right: 1px solid #ccc; }
+      #bike_table table tr.hours td.unavail {
+        background: #d7d7d7; }

@@ -30,20 +30,30 @@ class ProgramController < ApplicationController
   def edit
     _class = params[:_class]
     _id = params[:_id]
-    @object = eval(_class.titleize.singularize).find(_id)
+    @object = _class.classify.constantize.find(_id)
     render "program/#{_class.tableize}/edit"
   end
   
   def create
     _class = params[:_class]
-    @object = eval(_class.titleize.singularize).new(params[_class.underscore])
+    @object = _class.classify.constantize.new(params[_class.underscore])
     @object.save!
     redirect_to object_manage_path(_class, @object)
   end
   
+  def create_embedded
+    _parent = params[:_parent_class].classify.constantize
+    # @object = _parent.method(params[:])
+    
+  end
+  
+  def update_embedded
+    
+  end
+  
   def manage
     _class = params[:_class]
-    @objects = eval(_class.titleize.singularize).all
+    @objects = eval(_class.titleize.singularize).page params[:page]
     render "program/#{_class.tableize}/manage"
   end
   
@@ -54,20 +64,8 @@ class ProgramController < ApplicationController
   def reserve
     @reservation = Reservation.new(params[:reservation])
     day_offset = params[:day_offset].to_i
-    hour    = params[:hour].to_i
-    minute_offset = params[:minute_offset].to_i
-    hour_offset = params[:hour_offset].to_i
-    duration  = params[:duration].to_i
     
-    start = day_offset + hour + minute_offset + hour_offset
-    finish = start + duration
-    
-    puts start.to_s
-    puts finish.to_s
-    
-    date = Time.now.midnight + start.hours
-    @reservation.start = start
-    @reservation.stop = finish
+    date = Time.now.midnight + @reservation.start.hours / 2.0 + day_offset.days
     @reservation.date = date
     @reservation.user_id = current_user._id    
     @reservation.save

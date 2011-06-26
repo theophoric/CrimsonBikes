@@ -30,6 +30,5 @@ gem "aws-s3",            :require => "aws/s3"
 gem 'carrierwave'
 gem "mongoid-paperclip", :require => "mongoid_paperclip"
 gem 'fastercsv'
-gem 'kaminari'
 gem 'rest-client'
 gem 'gmaps4rails'
