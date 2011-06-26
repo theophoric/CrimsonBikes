@@ -220,6 +220,7 @@ ul.sortable{
 
 
 #objects_container{
+	overflow-y:scroll;
 	.bike{
 		border:1px solid #ccc;
 		@include rounded(4px);
@@ -229,9 +230,25 @@ ul.sortable{
 			padding:5px;
 		}
 	}
+	.reservation{
+		border:1px solid #ccc;
+		@include rounded(4px);
+		background-color:white;
+		min-height:75px;
+		.photo{
+			padding:5px;
+		}
+		.date{
+			font-size:24px;
+			font-weight:200;
+		}
+		.unlock_code{
+			margin-top:20px;
+		}
+	}
 }
 #filters_container{
-	min-height:600px;
+	min-height:500px;
 	margin-right:-1px;
 	border-right:1px solid #ccc;
 	.header{
@@ -355,4 +372,11 @@ ul.sortable{
 			}
 		}
 	}
+}
+#unlock_code{
+	font-size:24px;
+	font-weight:800;
+}
+#dialog{
+	display:none;
 }

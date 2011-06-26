@@ -15,17 +15,25 @@ class Bike
   # embeds_many :images, :as => :imageable
   embeds_one :description, :as => :describeable
   
+  scope :opperational, where(:_status => "opperational")
   default_scope asc(:_identifier)
   
   field :name, :default => "New Bike"
-  field :_model
+  field :_model, :default => "road"
   field :_status, :default => "standby"
   field :_identifier
+  field :_size, :default => "medium"
   
   index :_identifier, :unique => true
   
   validates_uniqueness_of :_identifier
   validates_inclusion_of :_status, :in => %w{ standby operational maintenance }
+  validates_inclusion_of :_model, :in => %w{ mountain road }
+  validates_inclusion_of :_size, :in => %w{ small medium large }
+  
+  def self.retrieve user
+    user.admin? ? all : opperational
+  end
   
   def reserve(reservation)
     #unless timeslot.where(:time.within => [start..stop], :date => date).any?

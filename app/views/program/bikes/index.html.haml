@@ -17,12 +17,12 @@
         .hidden
           = f.submit "Search"
     #location_filters.option-set.append-bottom{:data_filter_group => "location"}
-      .subheader location
+      .subheader.span-6 location
       .span-3.filter.default_filter= link_to "All", "#filter_location_any", :data_filter_value => ""
-      - %w{ leverett cabot kirkland }.each_with_index do |filter, index|
+      - %w{ leverett cabot mather lowell lamont science_center }.each_with_index do |filter, index|
         .filter.span-3{:class => ("last" if (index + 1) % 2 == 1)}= link_to "#{filter.titleize}", "#filter_location_#{filter}", :data_filter_value => "[location=#{filter}]"
     #model_filters.option-set.append-bottom{:data_filter_group => "model"}
-      .subheader model
+      .subheader.span-6 model
       .span-3.filter.default_filter= link_to "All", "#filter_model_any", :data_filter_value => ""
       - %w{ mountain street }.each_with_index do |filter, index|
         .filter.span-3{:class => ("last" if (index + 1) % 2 == 1)}= link_to "#{filter.titleize}", "#filter_model_#{filter}", :data_filter_value => "[model=#{filter}]"        
@@ -84,7 +84,7 @@
                 %tr.hours
                   
                   - ((12..47).to_a + (60..95).to_a).each{|i|haml_tag "td.timeslot-#{i}#{i % 2 == 0 ? ".even" : ".odd" }#{".final" if i == 47}#{(timeslot_array.include? "timeslot-#{i}") ? ".unavail" : ".avail"}"}
-          = link_to "#", :class => "link", :onclick => "$('#new_reservation .main').html('#{escape_javascript(render :partial => 'program/bikes/bike_reservation', :locals => {:bike => bike})}');$('#new_reservation_link').click();" do  
+          = link_to "#", :class => "reservation_link link", :onclick => "$('#new_reservation .main').html('#{escape_javascript(render :partial => 'program/bikes/bike_reservation', :locals => {:bike => bike})}');$('#new_reservation_link').click();" do  
             Reserve
         / = image_tag object.image.url 
       / = render 'program/bikes/bike', :locals => {:object => object}
@@ -98,8 +98,6 @@
   = link_to "New Reservation", '#new_reservation',:id => "new_reservation_link"
 :javascript
   $(function(){
-
-  $(this).css("opacity","0");
   $('#new_reservation_link').fancybox();
   $('#objects_container').isotope({});
   filter_properties();
@@ -120,7 +118,7 @@
   var stop_min = val_stop % 2 == 0 ? "00" : "30";
   var stop_offset = (val_stop < 24 || val_stop > 47) ? " am" : " pm";
   $('.times').text((start_hr == 0 ? 12 : start_hr) + ":" + start_min + start_offset + " - " + (stop_hr == 0 ? 12 : stop_hr) + ":" + stop_min + stop_offset);
-  filter_timeslots();
+  filter_properties();
   $('#reservation_start').val(val_start);
   $('#reservation_stop').val(val_stop);
   }

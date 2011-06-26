@@ -208,17 +208,32 @@ ul.sortable {
   height: 35px;
   width: 35px; }
 
-#objects_container .bike {
-  border: 1px solid #ccc;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  background-color: white;
-  min-height: 75px; }
-  #objects_container .bike .photo {
-    padding: 5px; }
+#objects_container {
+  overflow-y: scroll; }
+  #objects_container .bike {
+    border: 1px solid #ccc;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background-color: white;
+    min-height: 75px; }
+    #objects_container .bike .photo {
+      padding: 5px; }
+  #objects_container .reservation {
+    border: 1px solid #ccc;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background-color: white;
+    min-height: 75px; }
+    #objects_container .reservation .photo {
+      padding: 5px; }
+    #objects_container .reservation .date {
+      font-size: 24px;
+      font-weight: 200; }
+    #objects_container .reservation .unlock_code {
+      margin-top: 20px; }
 
 #filters_container {
-  min-height: 600px;
+  min-height: 500px;
   margin-right: -1px;
   border-right: 1px solid #ccc; }
   #filters_container .header {
@@ -297,3 +312,10 @@ ul.sortable {
         border-right: 1px solid #ccc; }
       #bike_table table tr.hours td.unavail {
         background: #d7d7d7; }
+
+#unlock_code {
+  font-size: 24px;
+  font-weight: 800; }
+
+#dialog {
+  display: none; }

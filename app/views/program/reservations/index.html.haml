@@ -1,0 +1,46 @@
+
+.span-24  
+  #filters_container.span-6
+    .header filters
+    #time_filters.option-set.append-bottom{:data_filter_group => "time"}
+      .subheader time
+      .span-3.filter.default_filter= link_to "All", "#filter_time_any", :data_filter_value => ""
+      - %w{ future current past }.each_with_index do |filter, index|
+        .filter.span-3{:class => ("last" if (index + 1) % 2 == 1)}= link_to "#{filter.titleize}", "#filter_time_#{filter}", :data_filter_value => "[time=#{filter}]"  
+    #location_filters.option-set.append-bottom{:data_filter_group => "location"}
+      .subheader location
+      .span-3.filter.default_filter= link_to "All", "#filter_location_any", :data_filter_value => ""
+      - %w{ leverett cabot kirkland }.each_with_index do |filter, index|
+        .filter.span-3{:class => ("last" if (index + 1) % 2 == 1)}= link_to "#{filter.titleize}", "#filter_location_#{filter}", :data_filter_value => "[location=#{filter}]"
+  #objects_container.span-16.prepend-1.last
+    - for reservation in @objects do
+      - bike = reservation.bike
+      - filter_data = reservation.filter_data
+      - timeslot_array = filter_data[:class].split(" ")
+      %div.span-16[reservation]{filter_data}
+        .span-16
+          .span-2
+            .photo
+              = link_to bike.image.versions[:medium].url, :class => "expandable", :title => bike.name do
+                = image_tag bike.image.versions[:thumb].url, :size => "60x60"
+          .span-10
+            .span-4
+              .date= reservation.expand_date
+              .time= reservation.expand_time
+            %span.bold= bike._identifier
+            = ", \"#{bike.name}\""
+            %br
+            = bike.location.name
+          .span-4.last.unlock_code
+            = unlock_code reservation
+          
+.hidden
+  #unlock_code
+  = link_to "View Unlock Code", '#unlock_code', :id => "unlock_code_link"
+:javascript
+  $(function(){
+  $('#objects_container').isotope({});
+  filter_properties();
+  $('.default_filter a').click();
+  $('#unlock_code_link').fancybox();
+  });
