@@ -19,10 +19,10 @@ function filter_timeslots(){
 	var start			=	parseInt($('#time_picker').slider("values", 0)) + day_offset;
 	var stop			=	parseInt($('#time_picker').slider("values", 1)) + day_offset;
 	if (start != stop){
-		var $optionSet = $('#filters_container .filter .selected');
+		// var $optionSet = $('#filters_container .filter .selected');
 		var $container = $("#objects_container");
 		var isoFilters = [];
-		$optionSet.each(function(){isoFilters.push($(this).attr("data_filter_value"))});
+		// $optionSet.each(function(){isoFilters.push($(this).attr("data_filter_value"))});
 		for(i = start; i < stop; i++){
 			isoFilters.push(":not(.timeslot-" + i + ")");
 		}
@@ -59,7 +59,7 @@ function filter_properties(){
       }
       var selector = isoFilters.join('');
       $container.isotope({ filter: selector });
-	  filter_timeslots();
+	  // filter_timeslots();
       return false;
     });
 	$('.filter a').button();
