@@ -12,6 +12,7 @@ Crimson2::Application.routes.draw do
   match 'welcome'                       => 'pages#welcome'            , :as => "welcome"
   match 'about'                         => 'pages#about'              , :as => "about"
   match 'contact'                       => 'pages#contact'              , :as => "contact"
+  match 'blog'                          => 'pages#blog'               , :as => "blog"
   
   match 'bikes/reserve' => "program#reserve", :as => "create_reservation"
   
