@@ -44,8 +44,9 @@
             %tr.hours
               - (12..47).each{|i|haml_tag "td.timeslot-#{i}#{i % 2 == 0 ? ".even" : ".odd" }#{".final" if i == 47}"}
       #time_picker
-      %span.day.bold Today, 
-      %span.times.bold
+      %span.flag
+        %span.day.bold Today, 
+        %span.times.bold
   #objects_container.span-16.prepend-1.last
     - for bike in @objects do
       - filter_data = bike.filter_data

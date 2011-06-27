@@ -15,7 +15,7 @@ class Bike
   # embeds_many :images, :as => :imageable
   embeds_one :description, :as => :describeable
   
-  scope :opperational, where(:_status => "opperational")
+  scope :opperational, where(:_status => "operational")
   default_scope asc(:_identifier)
   
   field :name, :default => "New Bike"

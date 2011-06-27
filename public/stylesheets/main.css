@@ -319,3 +319,6 @@ ul.sortable {
 
 #dialog {
   display: none; }
+
+.flag.illegal {
+  color: #c12721; }

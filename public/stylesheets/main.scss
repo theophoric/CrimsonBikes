@@ -380,3 +380,8 @@ ul.sortable{
 #dialog{
 	display:none;
 }
+.flag{
+	&.illegal{
+		color:$red;
+	}
+}
