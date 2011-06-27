@@ -8,7 +8,7 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  database: crimson2_development
+  database: crimsonbikes
 
 test:
   <<: *defaults
