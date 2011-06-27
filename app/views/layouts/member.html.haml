@@ -11,7 +11,7 @@
     = yield :head
     %body
       .container
-        #dialog{:title => "Notice"}
+        #dialog
         #header.span-22.prepend-1.append-1.last
           .span-6=image_tag "logo.jpg", :height=>100
           #navigation.span-16.last.bold.f3  
@@ -30,8 +30,8 @@
             .span-16.last.border-top.bold.f5.prepend-top.align-right
               %ul
                 %li= link_to "bikes", object_index_path("bikes"), :class => ('active' if params[:_class] == "bikes")
+                %li= link_to "reservations", object_index_path("reservations"), :class => ('active' if params[:_class] == "reservations")
                 %li= link_to "locations", object_index_path("locations"), :class => ('active' if params[:_class] == "locations")
-                %li= link_to "reservations", object_index_path("reservations"), :class => ('active' if params[:_class] == "reservations")                
                 %li= link_to "account", account_path
 
         #main.prepend-top.span-24
@@ -39,3 +39,9 @@
         #footer= yield :footer
       #loading.spinner
         = image_tag "loader.gif"
+- if flash[:notice]
+  :javascript
+    $('#dialog').attr("title", "Notice").html("#{flash[:notice]}").dialog();
+- if flash[:error]
+  :javascript
+    $('#dialog').attr("title", "ERROR").html("#{flash[:error]}").dialog();    

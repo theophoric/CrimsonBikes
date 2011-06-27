@@ -74,13 +74,13 @@ class Timeslot
   
   embedded_in :bike
   
-  scope :today, where(:date => Date.today)
-  scope :tomorrow, where(:date => Date.tomorrow)
+  scope :today, where(:date => Date.today.midnight)
+  scope :tomorrow, where(:date => (Date.today.midnight + 1.day))
   scope :active, where(:date.in => [Date.today, Date.tomorrow])
   
   default_scope asc(:time)
   
-  field :date, :type => Date, :default => (Date.today)
+  field :date
   field :time
   
   validates_presence_of :date, :time

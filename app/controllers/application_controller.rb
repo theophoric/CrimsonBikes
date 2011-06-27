@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   helper_method :admin_user?
-  before_filter :authenticate_user!
   protect_from_forgery
   
   

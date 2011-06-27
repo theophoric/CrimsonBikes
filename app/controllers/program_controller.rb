@@ -1,5 +1,5 @@
 class ProgramController < ApplicationController
-  
+  before_filter :authenticate_user!
   before_filter :authenticate_admin!, :except => [:index, :show, :home, :account, :reserve, :destroy]
   layout 'admin', :except => [:index, :show, :home]
 
@@ -78,8 +78,7 @@ class ProgramController < ApplicationController
     message = {}
     @reservation = Reservation.new(params[:reservation])
     day_offset = params[:day_offset].to_i
-    
-    date = Time.now.midnight + day_offset.days
+    date = Date.today.midnight + day_offset.days
     @reservation.date = date
     @reservation.user_id = current_user._id    
     @bike = Bike.find(@reservation.bike._id)    
