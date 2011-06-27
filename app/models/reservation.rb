@@ -60,7 +60,7 @@ class Reservation
     stop_hr = (stop / 2) % 12;
     stop_min = stop % 2 == 0 ? "00" : "30";
     stop_offset = stop < 24 ? " am" : " pm";
-    return "#{start_hr}:#{start_min} #{start_offset} - #{stop_hr}:#{stop_min} #{stop_offset}"
+    return "#{start_hr == 0 ? 12 : start_hr}:#{start_min} #{start_offset} - #{stop_hr == 0 ? 12 : stop_hr}:#{stop_min} #{stop_offset}"
   end
   
   def expand_date

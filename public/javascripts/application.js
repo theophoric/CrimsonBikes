@@ -19,13 +19,14 @@ function filter_timeslots(){
 	var start			=	parseInt($('#time_picker').slider("values", 0)) + day_offset;
 	var stop			=	parseInt($('#time_picker').slider("values", 1)) + day_offset;
 	if (start != stop){
-		// var $optionSet = $('#filters_container .filter .selected');
+		var $optionSet = $('#filters_container .filter .selected');
 		var $container = $("#objects_container");
 		var isoFilters = [];
-		// $optionSet.each(function(){isoFilters.push($(this).attr("data_filter_value"))});
+		$optionSet.each(function(){isoFilters.push($(this).attr("data_filter_value"))});	
 		for(i = start; i < stop; i++){
 			isoFilters.push(":not(.timeslot-" + i + ")");
 		}
+
 		var selector = isoFilters.join("");
 		$container.isotope({filter : selector});
 	}
@@ -50,16 +51,8 @@ function filter_properties(){
 	  
       // store filter value in object
       // i.e. filters.color = 'red'
-      var group = $optionSet.attr('data_filter_group');
-      filters[ group ] = $this.attr('data_filter_value');
-      // convert object into array
-      var isoFilters = [];
-      for ( var prop in filters ) {
-        isoFilters.push( filters[ prop ] )
-      }
-      var selector = isoFilters.join('');
-      $container.isotope({ filter: selector });
-	  // filter_timeslots();
+      
+	  filter_timeslots();
       return false;
     });
 	$('.filter a').button();
