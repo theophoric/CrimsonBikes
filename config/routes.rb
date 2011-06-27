@@ -1,13 +1,17 @@
 Crimson2::Application.routes.draw do
+  resources :profiles
+
   devise_for :users
   
-  root :to => 'program#home'
+  root :to => 'pages#welcome'
   
   
   
   match ':_class/:_id/show'             => 'program#show'            , :as => "object_show"
   match ':_class/index'                 => 'program#index'           , :as => "object_index"
-  match '/'                             => 'program#home'            , :as => "home"
+  match 'welcome'                       => 'pages#welcome'            , :as => "welcome"
+  match 'about'                         => 'pages#about'              , :as => "about"
+  match 'contact'                       => 'pages#contact'              , :as => "contact"
   
   match 'bikes/reserve' => "program#reserve", :as => "create_reservation"
   

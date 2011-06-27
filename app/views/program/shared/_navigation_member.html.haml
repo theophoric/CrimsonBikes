@@ -1,0 +1,4 @@
+%ul
+  %li= link_to "bikes", object_index_path("bikes"), :class => ('active' if params[:_class] == "bikes")
+  %li= link_to "reservations", object_index_path("reservations"), :class => ('active' if params[:_class] == "reservations")
+  %li= link_to "account", account_path

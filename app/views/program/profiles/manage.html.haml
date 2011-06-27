@@ -1,0 +1,9 @@
+= link_to "Add object", object_new_path('object')
+= paginate @objects
+%table 
+  - for object in @objects do
+    %tr
+      %td= image_tag object.image.url(:thumb)
+      %td= object.name
+      %td= link_to "Show", object_show_path("object", object)
+      %td= link_to "Edit", object_edit_path("object", object)

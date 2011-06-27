@@ -1,0 +1,21 @@
+- object ||= object
+
+= form_for object do |f|
+  -if object.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(object.errors.count, "error")} prohibited this profile from being saved:"
+      %ul
+        - object.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name_first, "First Name"
+    = f.text_field :name_first
+  .field
+    = f.label :name_last, "Last Name"
+    = f.text_field :name_last
+  .field
+    = f.label :bio
+    = f.text_area :bio, :class => "tinyMce"
+  .actions
+    = f.submit 'Save'

@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b String:
+  = @profile.string
+%p
+  %b String:
+  = @profile.string
+%p
+  %b Text:
+  = @profile.text
+
+= link_to 'Edit', edit_profile_path(@profile)
+\|
+= link_to 'Back', profiles_path

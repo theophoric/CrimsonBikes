@@ -1,4 +1,5 @@
-
+= link_to "Add #{params[:_class]}", object_new_path(params[:_class])
+= paginate @objects
 %table 
   - for location in @objects do
     %tr

@@ -34,6 +34,9 @@ body{
 }
 ul{
 	text-align:left;
+	&.large{
+		line-height:40px;font-size:25px;
+	}
 }
 
 #header{
@@ -79,7 +82,16 @@ ul, ol{
 // input{
 // 	text-align:left !important;
 // }
-
+#account{
+	p{
+		padding:20px;
+	}
+}
+#about{
+	p{
+		text-align:left;
+	}
+}
 a{
 	text-decoration:none;
 	color:#616265;
@@ -89,6 +101,10 @@ a{
 	}
 
 }
+#about{
+	font-size:14px;
+}
+
 #fancybox-outer{
 	color:#979797;
 }
@@ -384,4 +400,22 @@ ul.sortable{
 	&.illegal{
 		color:$red;
 	}
+}
+
+// NIVO SLIDER
+#slider {
+    position:relative;
+    width:645px; /* Change this to your images width */
+    height:315px; /* Change this to your images height */
+    background:url(images/loading.gif) no-repeat 50% 50%;
+}
+#slider img {
+    position:absolute;
+    top:0px;
+    left:0px;
+    display:none;
+}
+#slider a {
+    border:0;
+    display:block;
 }

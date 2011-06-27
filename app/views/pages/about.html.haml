@@ -1,0 +1,133 @@
+#about
+  #tabs.prepend-top
+    %ul
+      - %w{ crimson_bikes how_to_register safety FAQ  }.each do |tab|
+        %li.align-center
+          = link_to tab.titleize, "#tab-#{tab}"
+    #tab-crimson_bikes
+      .span-8= image_tag 'about1.jpg', :width => 300
+      .span-13.align-left.prepend-1.last
+        %p
+          Welcome to CrimsonBikes! Harvard University is now home to the largest bike-share program in New
+          England, with a fleet of over 70 magnificent bikes at the disposal of the Harvard Community. Become
+          a member and take a ride on one of our sweet, high-quality, old, new, rescued, and refurbished bikes.
+          For a very low cost, you will be able to get from A to B at any time you need. Just reserve a bike, pick
+          it up, go where you need to go, and return the bike at one of our conveniently located stations. You’ll
+          save time and money on your transportation. Plus, if you already have a bike and don’t really use it,
+          share it with others so that it can get a little love. (Don’t worry, we’ll take good care of it, and you’ll be
+          an automatic member). Contact us at info@CrimsonBikes.org for more details. Sign in and hop on with
+          CrimsonBikes this year!
+    
+    #tab-safety
+      %p
+        CrimsonBikes is all about having fun on the road, in the hills, or around campus on a bike, but we take
+        safety very seriously. We hope everyone will be able to use our services without getting hurt.
+      %p
+        For this reason, our awesome mechanics will keep the bikes in top condition, so that you’re always
+        coasting with confidence and unafraid that a part will fail you right when you’re crossing the
+        intersection.
+      %p
+        Also, as much as we love adventure, and as much as we relish the idea of converting our bikes into a
+        fleet of really badass dirt bikes when it rains – or really desperate snow sleds when it snows – we will
+        also decline to rent out bikes to members in inclement weather.
+      %p
+        There are, of course, many things you can do to increase your odds of an accident-free journey.
+        CrimsonBikes strongly encourages all members to wear a helmet while biking and to wear bright/
+        reflective colors while biking at night. Pay attention to all traffic signals, be aware of your surroundings,
+        and walk your bike in areas where biking is prohibited, such as the Yard. HUPD will enforce this even if
+        we don’t, so please be mindful of your fellow pedestrians.
+      %p
+        Bike happy and be safe!
+    #tab-how_to_register
+      %p
+        Simply go onto the homepage of this website, sign in with your email address, and follow the directions
+        from there. You’ll get the option to choose between three different memberships, and can pay online
+        using a credit card or check/cash (though these will take a little longer to process.) Once you’ve been
+        sent the confirmation email, and have confirmed your address, you can make a reservation with the bike
+        of your choice.
+    #tab-FAQ
+      %p.bold  
+        FAQS:
+      %p
+        What is a bike share?
+      %p
+        A bike share is exactly what it sounds like – a program of bikes, shared between members of the
+        community. Instead of buying a bike, which can be expensive, cumbersome, or difficult to maintain, a
+        person might choose instead to borrow a bike whenever they need it, then return it for use by someone
+        else. Drawing off the wisdom of three generations of bike share programs in Europe and the U.S.,
+        CrimsonBikes aims to cater to the Harvard Community in a way that is safe, easy, and affordable for you.
+      %p.bold
+        How many pounds of carbon dioxide are saved each year by bike riding?
+      %p
+        We thought you’d never ask. Actually, according to one estimate by ___, bike riding saved (the
+        Netherlands?) over (x) pounds of carbon dioxide each year. Biking is certainly pitted to be one of the
+        most successful modes of transportation of the future, so CrimsonBikes is both following a tradition
+        of established biking cultures around the world, and also leading the way in spreading this healthy,
+        practical, and environmental tradition to the Eastern Seaboard.
+      %p.bold
+        How do I join?
+      %p
+        Simply go onto the homepage of this website, sign in with your email address, and follow the directions
+        from there. You’ll get the option to choose between three different memberships, and can pay online
+        using a credit card or check/cash (those these will take a little longer to process.) Once you’ve been sent
+        the confirmation email, and have confirmed your address, you can make a reservation with the bike of
+        your choice.
+      %p.bold
+        Where are the CrimsonBike Stations?
+      %p
+        There are currently 4 CrimsonBike Stations around the Yard and around campus: Leverett House Guard’s
+        Office, Cabot House, the Science Center, and Lamont. As the program grows, we hope to expand so that
+        more stations are available close to your departure point and destination.
+      %p.bold
+        What if I recognize my lost or stolen bike among your CrimsonBikes?
+      %p
+        No worries. We will be happy to return your bike if you identify one of them as yours.
+      %p.bold
+        Can I share my bike membership with a friend?
+      %p
+        Sadly, no. We do offer our 1-day $5 membership especially for folks who just want to take a ride for a
+        few hours, are in town for the day, and don’t want the full-year membership. But don’t share your code
+        with anyone else, as it seriously compromises our security, and makes it harder for us to give you access
+        to great bikes and great service.
+      %p.bold
+        Can I reserve a bike for the next day while I am still using one today?
+      %p
+        Nope. We want to have bikes available to everyone equally, as consistently as possible, so you’re
+        not allowed to reserve a bike until you’ve returned the one you’re using. However, the 24-hour time
+        window of the $35 one-year membership is designed to give you as much flexibility as possible, so that
+        might be the best option for you, if you know that you’ll be using your membership on a frequent basis.
+      %p.bold
+        How will you keep track of all the bikes?
+      %p
+        Security cameras…we’re watching you!!! Jk. But not really.
+      %p.bold
+        So what happens if I lend you one of my bikes?
+      %p
+        First of all, it would be awesome of you to lend us one of your bikes. Others would benefit from having
+        increase availability of bikes in the fleet, and would have a more reliable method of getting from A to
+        B. As for you, you’d receive a $100 (?) gift in exchange for your contribution, and you’d become an
+        automatic member. (*which kind of membership? The top tier, right?) We’d take excellent care of your
+        machine – our mechanics would ensure that it is in top condition, and you might even get it back better
+        than when you gave it to us.
+      %p.bold
+        What if it gets permanently damaged or stolen?
+      %p
+        We would reimburse you for the full cost of the bike. *double-check.
+      %p.bold
+        What’s the difference between a mountain bike and a road bike?
+      %p
+        A road bike is the one with the really narrow wheels, designed mainly for travel along (you guessed it)
+        a road. A mountain bike is intended for rougher terrain, and as such has deeper tire grooves and wider
+        tires to keep control of the ground. You can pick whichever type of bike best suits the needs of your trip.
+      %p.bold
+        Ok, is there any reason not to use CrimsonBikes?
+      %p
+        No, not really, unless you already have a bike, don’t know how to ride, or hate bikes. Or hate helmets.
+        Or both. But don’t despair if you don’t know how to ride a bike – now is always a good time to start
+        learning a new thing, and you can count on us to provide you with the starter bike you need! However,
+        we don’t offer training wheels or biking lessons at this point, and emphasize caution in attempting any
+        new skill on the road. Recruit your friends, go for a spin, and remember to be safe! A word to the wise:
+        Sundays during the summer, Memorial Avenue is always closed off for bikers, joggers, skaters, and
+        pedestrians like you to rule the road!
+:javascript
+  $('#tabs').tabs();

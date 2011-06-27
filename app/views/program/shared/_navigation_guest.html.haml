@@ -1,0 +1,4 @@
+%ul
+  %li= link_to "welcome", welcome_path, :class => ("active" if params[:action] == "welcome")
+  %li= link_to "about", about_path, :class => ("active" if params[:action] == "about")
+  %li= link_to "contact", contact_path, :class => ("active" if params[:action] == "contact")

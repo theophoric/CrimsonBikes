@@ -46,6 +46,9 @@ body {
 
 ul {
   text-align: left; }
+  ul.large {
+    line-height: 40px;
+    font-size: 25px; }
 
 #header {
   height: 90px; }
@@ -81,12 +84,21 @@ ul, ol {
   height: 102px;
   /*hight of the spinner gif +2px to fix IE8 issue */ }
 
+#account p {
+  padding: 20px; }
+
+#about p {
+  text-align: left; }
+
 a {
   text-decoration: none;
   color: #616265; }
   a:hover {
     background-color: transparent;
     color: #282828; }
+
+#about {
+  font-size: 14px; }
 
 #fancybox-outer {
   color: #979797; }
@@ -322,3 +334,21 @@ ul.sortable {
 
 .flag.illegal {
   color: #c12721; }
+
+#slider {
+  position: relative;
+  width: 645px;
+  /* Change this to your images width */
+  height: 315px;
+  /* Change this to your images height */
+  background: url(images/loading.gif) no-repeat 50% 50%; }
+
+#slider img {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: none; }
+
+#slider a {
+  border: 0;
+  display: block; }

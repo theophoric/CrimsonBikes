@@ -1,24 +1,29 @@
 class ProgramController < ApplicationController
   before_filter :authenticate_user!
   before_filter :authenticate_admin!, :except => [:index, :show, :home, :account, :reserve, :destroy]
-  layout 'admin', :except => [:index, :show, :home]
 
   
+  uses_tiny_mce :options => { 
+                              :theme => "advanced",
+                              :theme_advanced_buttons3 => "pasteword, fullscreen, fontsizeselect, separator, tablecontrols",
+                              :plugins => %w{ fullscreen paste spellchecker table }
+                            }
+  
   def home
-    render 'program/home', :layout => 'application'
+    render 'program/home'
   end
   
   def index
     _class = params[:_class] || "Bike"
     @objects = _class.classify.constantize.retrieve current_user
-    render "program/#{_class.tableize}/index", :layout => 'application'
+    render "program/#{_class.tableize}/index"
   end
   
   def show
     _class = params[:_class]
     _id = params[:_id]
     @object = _class.classify.constantize.find(_id)
-    render "program/#{_class.tableize}/show", :layout => 'application'
+    render "program/#{_class.tableize}/show"
   end
   
   def new
@@ -76,23 +81,26 @@ class ProgramController < ApplicationController
   
   def reserve
     message = {}
-    @reservation = Reservation.new(params[:reservation])
-    day_offset = params[:day_offset].to_i
-    date = Date.today.midnight + day_offset.days
-    @reservation.date = date
-    @reservation.user_id = current_user._id    
-    @bike = Bike.find(@reservation.bike._id)    
-    if @reservation.save && @bike.reserve(@reservation)
-      message[:notice] = "Your reservation was successful"
+    if current_user.processed
+      @reservation = Reservation.new(params[:reservation])
+      day_offset = params[:day_offset].to_i
+      date = Date.today.midnight + day_offset.days
+      @reservation.date = date
+      @reservation.user_id = current_user._id    
+      @bike = Bike.find(@reservation.bike._id)    
+      if @reservation.save && @bike.reserve(@reservation)
+        message[:notice] = "Your reservation was successful"
+      else
+        message[:error] = "There was an error in your request"
+      end
     else
-      message[:error] = "There was an error in your request"
+      message[:notice] = "You must wait until your membership payment has been processed until you can reserve bikes."
     end
-
     redirect_to (object_index_path("bikes"), message)
   end
   
   def account
-    
+    render 'program/account'
   end
   
   

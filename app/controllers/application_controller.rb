@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-  helper_method :admin_user?
+  
+  helper_method :admin_user?, :current_usertype
   protect_from_forgery
   
   
@@ -11,4 +12,15 @@ class ApplicationController < ActionController::Base
     user_signed_in? && current_user.admin?
   end
   
+  def current_usertype
+    if user_signed_in?
+      if current_user.admin?
+        "admin"
+      else
+        "member"
+      end
+    else
+      "guest"
+    end
+  end
 end
