@@ -10,31 +10,31 @@
     = csrf_meta_tag
     = yield :head
     %meta{ :name=>"google-site-verification" :content=>"PHinRMSVsO9a8OttdPTiy3WmK3r_QA1DEhsExj4Ccp4"}
-    %body
-      .container
-        #dialog
-        #header.span-22.prepend-1.append-1.last
-          .span-6=image_tag "logo.jpg", :height=>100
-          #navigation.span-16.last.bold.f3  
-            .span-8
-              %ul
-                %li= "Welcome, #{current_user.name_first}" if user_signed_in?
-            .span-8.last.align-right
-              %ul
-                -if user_signed_in?
-                  %li=link_to "[ sign out ]", destroy_user_session_path
-                  - if admin_user?
-                    %li= link_to "admin view", admin_path
-                -else
-                  %li=link_to "[ sign in ]", new_user_session_path, :class => ('active' if params[:controller] == 'devise/sessions')
-                  %li=link_to "[ register ]", new_user_registration_path, :class => ('active' if params[:controller] == 'devise/registrations')
-            .span-16.last.border-top.bold.f5.prepend-top.align-right
-              = render :partial => "program/shared/navigation_#{current_usertype}"
-        #main.prepend-top.span-24
-          #content=yield
-        #footer= yield :footer
-      #loading.spinner
-        = image_tag "loader.gif"
+  %body
+    .container
+      #dialog
+      #header.span-22.prepend-1.append-1.last
+        .span-6=image_tag "logo.jpg", :height=>100
+        #navigation.span-16.last.bold.f3  
+          .span-8
+            %ul
+              %li= "Welcome, #{current_user.name_first}" if user_signed_in?
+          .span-8.last.align-right
+            %ul
+              -if user_signed_in?
+                %li=link_to "[ sign out ]", destroy_user_session_path
+                - if admin_user?
+                  %li= link_to "admin view", admin_path
+              -else
+                %li=link_to "[ sign in ]", new_user_session_path, :class => ('active' if params[:controller] == 'devise/sessions')
+                %li=link_to "[ register ]", new_user_registration_path, :class => ('active' if params[:controller] == 'devise/registrations')
+          .span-16.last.border-top.bold.f5.prepend-top.align-right
+            = render :partial => "program/shared/navigation_#{current_usertype}"
+      #main.prepend-top.span-24
+        #content=yield
+      #footer= yield :footer
+    #loading.spinner
+      = image_tag "loader.gif"
 - if flash[:notice]
   :javascript
     $('#dialog').attr("title", "Notice").html("#{flash[:notice]}").dialog();
