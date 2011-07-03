@@ -29,6 +29,17 @@ function filter_timeslots(){
 
 		var selector = isoFilters.join("");
 		$container.isotope({filter : selector});
+		if ((stop- start) > 10){
+			$('.flag').addClass("illegal");
+			$('.message').html('<div class="error">Your reservation under your current membership cannot exceed 5 hours.</div>');
+			$('.reservation_link').button({disabled:true});
+		}
+		else{
+			$('.flag').removeClass("illegal");
+			$('.message').html("");
+			$('.reservation_link').button({disabled:false});
+		}
+		
 	}
 }
 

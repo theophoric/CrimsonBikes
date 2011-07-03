@@ -1,5 +1,3 @@
 %ul
-  %li=  link_to "bikes", object_manage_path("bikes")
-  %li=  link_to "locations", object_manage_path("locations")
-  %li=  link_to "users", object_manage_path("users")
-  %li=  link_to "reservations", object_manage_path("reservations")
+  - %w{bikes locations users reservations pages unlock_codes tickets}.each do |header|
+    %li=  link_to header.gsub("_"," "), object_manage_path(header)

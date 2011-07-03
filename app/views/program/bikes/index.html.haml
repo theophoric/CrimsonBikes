@@ -21,6 +21,11 @@
       .span-3.filter.default_filter= link_to "All", "#filter_location_any", :data_filter_value => ""
       - %w{ leverett cabot mather lowell lamont science_center }.each_with_index do |filter, index|
         .filter.span-3{:class => ("last" if (index + 1) % 2 == 1)}= link_to "#{filter.titleize}", "#filter_location_#{filter}", :data_filter_value => "[location=#{filter}]"
+    #size_filters.option-set.append-bottom{:data_filter_group => "size"}
+      .subheader.span-6 size
+      .span-3.filter.default_filter= link_to "All", "#filter_size_any", :data_filter_value => ""
+      - %w{ small medium large }.each_with_index do |filter, index|
+        .filter.span-3{:class => ("last" if (index + 1) % 2 == 1)}= link_to "#{filter.titleize}", "#filter_size_#{filter}", :data_filter_value => "[size=#{filter}]"        
     #model_filters.option-set.append-bottom{:data_filter_group => "model"}
       .subheader.span-6 model
       .span-3.filter.default_filter= link_to "All", "#filter_model_any", :data_filter_value => ""
@@ -47,55 +52,56 @@
       %span.flag
         %span.day.bold Today, 
         %span.times.bold
-  #objects_container.span-16.prepend-1.last
-    - for bike in @objects do
-      - if bike.image.url("medium")
-        - filter_data = bike.filter_data
-        - timeslot_array = filter_data[:class].split(" ")
-        %div.span-16[bike]{filter_data}
-          .span-2
-            .photo
-              = link_to bike.image.url("medium"), :class => "expandable", :title => bike.name do
-                = image_tag bike.image.url("medium"), :size => "60x60"
-          .span-13.last
-            %span.bold= bike._identifier
-            = ", \"#{bike.name}\""
-            #bike_table.span-13
-              %table{:cellspacing => "0"}
-                %tbody
-                  %tr.days
-                    %td.first{:colspan => "36"}
-                      Today
-                    %td{:colspan => "36"}
-                      Tomorrow
-                  %tr.quarters
-                    %td.first{:colspan => "12"}
-                      6 am
-                    %td{:colspan => "12"}
-                      noon
-                    %td{:colspan => "12"}
-                      6 pm
-                    %td{:colspan => "12"}
-                      6 am
-                    %td{:colspan => "12"}
-                      noon
-                    %td{:colspan => "12"}
-                      6 pm                              
-                    / %td{:colspan => "12"}
-                    /   12am
-                  %tr.hours
+        .message
+  #isotope_wrapper
+    #objects_container.span-16.prepend-1.last
+      - for bike in @objects do
+        - if bike.image.url("medium")
+          - filter_data = bike.filter_data
+          - timeslot_array = filter_data[:class].split(" ")
+          %div.span-16[bike]{filter_data}
+            .span-2
+              .photo
+                = link_to bike.image.url("medium"), :class => "expandable", :title => bike.name do
+                  = image_tag bike.image.url("medium"), :size => "60x60"
+            .span-13.last
+              %span.bold= bike._identifier
+              = ", \"#{bike.name}\""
+              #bike_table.span-13
+                %table{:cellspacing => "0"}
+                  %tbody
+                    %tr.days
+                      %td.first{:colspan => "36"}
+                        Today
+                      %td{:colspan => "36"}
+                        Tomorrow
+                    %tr.quarters
+                      %td.first{:colspan => "12"}
+                        6 am
+                      %td{:colspan => "12"}
+                        noon
+                      %td{:colspan => "12"}
+                        6 pm
+                      %td{:colspan => "12"}
+                        6 am
+                      %td{:colspan => "12"}
+                        noon
+                      %td{:colspan => "12"}
+                        6 pm                              
+                      / %td{:colspan => "12"}
+                      /   12am
+                    %tr.hours
                   
-                    - ((12..47).to_a + (60..95).to_a).each{|i|haml_tag "td.timeslot-#{i}#{i % 2 == 0 ? ".even" : ".odd" }#{".final" if i == 47}#{(timeslot_array.include? "timeslot-#{i}") ? ".unavail" : ".avail"}"}
-            = link_to "#", :class => "reservation_link link", :onclick => "$('#new_reservation .main').html('#{escape_javascript(render :partial => 'program/bikes/bike_reservation', :locals => {:bike => bike})}');$('#new_reservation_link').click();" do  
-              Reserve
-        / = image_tag object.image.url 
-      / = render 'program/bikes/bike', :locals => {:object => object}
+                      - ((12..47).to_a + (60..95).to_a).each{|i|haml_tag "td.timeslot-#{i}#{i % 2 == 0 ? ".even" : ".odd" }#{".final" if i == 47}#{(timeslot_array.include? "timeslot-#{i}") ? ".unavail" : ".avail"}"}
+              = link_to "#", :class => "reservation_link link", :onclick => "$('#new_reservation .main').html('#{escape_javascript(render :partial => 'program/bikes/bike_reservation', :locals => {:bike => bike})}');$('#new_reservation_link').click();" do  
+                Reserve
 .hidden
   #new_reservation
     .title
       Confirm Reservation for 
-      %span.day Today, 
-      %span.times
+      %span.flag
+        %span.day Today, 
+        %span.times
     .main
   = link_to "New Reservation", '#new_reservation',:id => "new_reservation_link"
 :javascript

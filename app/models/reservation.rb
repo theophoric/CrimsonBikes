@@ -7,6 +7,7 @@ class Reservation
   
   scope :today, where(:date => Date.today)
   scope :tomorrow, where(:date => Date.tomorrow)
+  # scope :future, where(:date)
   default_scope desc(:date, :start, :stop)
   
   field :date,   :type => Time, :default => (Time.now)

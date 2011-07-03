@@ -1,8 +1,9 @@
 - object ||= @object
 - locations = Location.all.collect{|location|[location.name, location.id]}
+- url = (params[:action] == "edit" ? object_edit_path(object.class.inspect) : object_create_path(object.class.inspect))
 .span-8
   %ul
-    = form_for object, :url => object_create_path(object.class.inspect), :html => {:multipart => true} do |f|
+    = form_for object, :url => url, :html => {:multipart => true} do |f|
       %li= f.label :name
       %li= f.text_field :name
       %br

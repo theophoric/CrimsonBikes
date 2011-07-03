@@ -49,8 +49,9 @@ class Bike
     data = {:class => []}
     c_array = timeslots.today.collect{|t| "timeslot-#{t.time}"} + timeslots.tomorrow.collect{|t| "timeslot-#{t.time + 48}"}
     data[:location] = location.name.gsub(" ", "_").downcase if location
-    data[:model] = _model
-    data[:class] = c_array.join(" ")
+    data[:model]  = _model
+    data[:class]  = c_array.join(" ")
+    data[:size]   = _size
     # description.attributes.each do |key, value|
     #   data[key.to_sym] = value
     # end

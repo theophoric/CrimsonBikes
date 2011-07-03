@@ -1,0 +1,13 @@
+- current_combination = UnlockCode.get_current
+- if current_combination
+  .notice
+    = "Current Combination for #{current_combination.unlock_date.to_date}:"
+    %b=" #{current_combination.combination}"
+
+  
+%table
+  - for object in @objects do
+    %tr[object]
+      %td= object.unlock_date
+      %td= object.combination
+    

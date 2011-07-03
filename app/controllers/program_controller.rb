@@ -1,7 +1,7 @@
 class ProgramController < ApplicationController
   before_filter :authenticate_user!
   before_filter :authenticate_admin!, :except => [:index, :show, :home, :account, :reserve, :destroy]
-
+  
   
   uses_tiny_mce :options => { 
                               :theme => "advanced",
@@ -36,7 +36,7 @@ class ProgramController < ApplicationController
     _class = params[:_class]
     _id = params[:_id]
     @object = _class.classify.constantize.find(_id)
-    render "program/#{_class.tableize}/edit"
+    render "program/#{_class.tableize}/edit", :layout => 'admin'
   end
   
   def create
@@ -72,7 +72,7 @@ class ProgramController < ApplicationController
   def manage
     _class = params[:_class]
     @objects = _class.classify.constantize.page params[:page]
-    render "program/#{_class.tableize}/manage"
+    render "program/#{_class.tableize}/manage", :layout => 'admin'
   end
   
   def admin
@@ -103,5 +103,9 @@ class ProgramController < ApplicationController
     render 'program/account'
   end
   
+  def regenerate_combination
+    @object = UnlockCode.find(params[:id])
+    @object.update_attribute(:combination, UnlockCode.generate_combination)
+  end
   
 end

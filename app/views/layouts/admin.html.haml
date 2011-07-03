@@ -14,22 +14,22 @@
     .container
       #dialog
       #header.span-24
-        .span-6=image_tag "logo.jpg", :height=>100
-        #navigation.span-18.last.bold.f3  
+        .span-4=image_tag "logo.jpg", :height=>100
+        #navigation.span-20.last.bold.f3  
           .span-8
             %ul
               %li= "Welcome, #{current_user.name_first}" if user_signed_in?
-          .span-10.last.align-right
+          .span-12.last.align-right
             %ul
               -if user_signed_in?
                 %li=link_to "[ sign out ]", destroy_user_session_path
                 - if admin_user?
-                  %li= link_to "admin view", object_manage_path("bikes")
+                  %li= link_to "user view", object_index_path("bikes")
               -else
                 %li=link_to "[ sign in ]", new_user_session_path, :class => ('active' if params[:controller] == 'devise/sessions')
                 %li=link_to "[ register ]", new_user_registration_path, :class => ('active' if params[:controller] == 'devise/registrations')
-          .span-18.last.border-top.bold.f5.prepend-top.align-right
-            = render :partial => "program/shared/navigation_#{user_signed_in? ? "member" : "guest"}"
+          .span-20.last.border-top.bold.f5.prepend-top.align-right
+            = render :partial => "program/shared/navigation_admin"
       #main.prepend-top.span-24
         #content=yield
       #footer= yield :footer
@@ -41,4 +41,3 @@
 - if flash[:error]
   :javascript
     $('#dialog').attr("title", "ERROR").html("#{flash[:error]}").dialog();    
-  

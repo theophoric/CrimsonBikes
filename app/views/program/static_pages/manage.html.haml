@@ -1,10 +1,9 @@
 - objects ||= @objects
-= link_to "Add #{params[:_class]}", object_new_path(params[:_class])
+= link_to "Add Page", object_new_path('static_pages')
 = paginate @objects
 %table
   - for object in @objects do
     %tr[object]
       %td= object.title
-      %td= object.sections.count
-      %td= link_to "Edit", object_manage_path(params[:_class], object._id)
-= link_to new_object_path(params[:_class])
+      %td= object._pos
+      %td= link_to "Edit", object_manage_path("static_pages", object._id)
