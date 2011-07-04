@@ -3,9 +3,18 @@
 .span-8
   %ul
     = form_for object, :url => url do |f|
-      = f.label :title
-      = f.text_field :title
-      = f.label :text
-      = f.text_area :text, :class => "mceEditor"
-      = f.submit
+      %li
+        = f.label :title
+        = f.text_field :title
+      %br  
+      %li
+        = f.label :_pos, "Position"
+        = f.number_field :_pos
+      %br
+      %li
+        = f.label :text
+        = f.text_area :text, :class => "mceEditor"
+      %br
+      %li  
+        = f.submit
       

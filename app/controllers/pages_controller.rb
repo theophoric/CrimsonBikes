@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   end
   
   def about
-
+    @pages = StaticPage.all
   end
   
   def contact

@@ -7,3 +7,9 @@
         %td.bold= field.titleize
         %td= user.read_attribute(field)
     
+.span-6
+  = form_for user, :url => object_update_path("users", user) do |f|
+    = f.label :processed
+    = f.select :processed, options_for_select([["True", true], ["False", false]])
+    = f.submit
+    
