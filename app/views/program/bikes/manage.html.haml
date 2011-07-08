@@ -3,7 +3,7 @@
 %table 
   - for bike in @objects do
     %tr
-      %td= image_tag bike.image.url(:thumb) if bike.url("thumb")
+      %td= image_tag bike.image.url(:thumb) if bike.image.url("thumb")
       %td= bike.name
       %td= link_to bike.location.name, object_show_path("location", bike.location)
       %td= bike._status

@@ -7,12 +7,14 @@ class Reservation
   
   scope :today, where(:date => Date.today)
   scope :tomorrow, where(:date => Date.tomorrow)
+  scope :unreminded, where(:reminder_sent => false)
   # scope :future, where(:date)
   default_scope desc(:date, :start, :stop)
   
   field :date,   :type => Time, :default => (Time.now)
   field :start,  :type => Integer, :default => (Time.now.hour < 6 ? 12 : (Time.now.hour * 2))
   field :stop,   :type => Integer, :default => (Time.now.hour < 6 ? 14 : (Time.now.hour * 2 + 2))
+  field :reminder_sent, :type => Boolean, :default => false
   
   index :date
   index :start
