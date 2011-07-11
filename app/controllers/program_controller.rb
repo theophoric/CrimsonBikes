@@ -39,6 +39,15 @@ class ProgramController < ApplicationController
     render "program/#{_class.tableize}/edit", :layout => 'admin'
   end
   
+  def update
+    _class = params[:_class]
+    _id = params[:_id]
+    @object = _class.classify.constantize.find(_id)
+    @object.update_attributes(params[_class.underscore])
+    flash[:notice] => "#{_class.titleize} Updated"
+    render "program/#{_class.tableize}/edit", :layout => 'admin'
+  end
+  
   def create
     _class = params[:_class]
     @object = _class.classify.constantize.new(params[_class.underscore.to_sym])
