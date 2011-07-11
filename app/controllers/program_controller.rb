@@ -82,16 +82,20 @@ class ProgramController < ApplicationController
   def reserve
     message = {}
     if current_user.processed
-      @reservation = Reservation.new(params[:reservation])
-      day_offset = params[:day_offset].to_i
-      date = Date.today.midnight + day_offset.days
-      @reservation.date = date
-      @reservation.user_id = current_user._id    
-      @bike = Bike.find(@reservation.bike._id)    
-      if @reservation.save && @bike.reserve(@reservation)
-        message[:notice] = "Your reservation was successful"
+      if current_user.reservations.future.none? 
+        @reservation = Reservation.new(params[:reservation])
+        day_offset = params[:day_offset].to_i
+        date = Date.today.midnight + day_offset.days
+        @reservation.date = date
+        @reservation.user_id = current_user._id    
+        @bike = Bike.find(@reservation.bike._id)    
+        if @reservation.save && @bike.reserve(@reservation)
+          message[:notice] = "Your reservation was successful"
+        else
+          message[:error] = "There was an error in your request"
+        end
       else
-        message[:error] = "There was an error in your request"
+        message[:error] = "You can only have one active reservation at a time with your current membership."
       end
     else
       message[:notice] = "You must wait until your membership payment has been processed until you can reserve bikes."

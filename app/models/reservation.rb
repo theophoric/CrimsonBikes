@@ -7,6 +7,8 @@ class Reservation
   
   scope :today, where(:date => Date.today)
   scope :tomorrow, where(:date => Date.tomorrow)
+  scope :future, where(:date.gte => Date.today)
+  scope :past, where(:date.lt => Date.today)
   scope :unreminded, where(:reminder_sent => false)
   # scope :future, where(:date)
   default_scope desc(:date, :start, :stop)

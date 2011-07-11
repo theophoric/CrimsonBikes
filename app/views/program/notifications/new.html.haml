@@ -1,0 +1,21 @@
+.span-10
+  = form_for :notice_options , :url => notification_send_path do |f|
+    %ul.align-right
+      %li
+        = label_tag :reciptients, "Recipient List"
+        = select_tag :recipients, options_from_collection_for_select(@users, 'id', 'email', @to), {:multiple => true}
+      %br
+      %li
+        = f.label :from, "Send From"
+        = f.select :from, options_for_select(["info@crimsonbikes.org", "reservations@crimsonbikes.org", "registration@crimsonbikes.org", "help@crimsonbikes.org", "membership@crimsonbikes.org"])
+      %br
+      %li
+        = f.label :subject
+        = f.text_field :subject
+      %br
+      %li
+        = text_area_tag :body,"", :class => "mceEditor"
+      %br
+      %li
+        = f.submit "Send Notice"
+  

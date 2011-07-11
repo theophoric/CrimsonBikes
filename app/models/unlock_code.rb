@@ -3,7 +3,7 @@ class UnlockCode
   
   scope :expired, where(:unlock_date.lt => Time.now.midnight)
   scope :future, where(:unlock_date.gt => Time.now.midnight)
-  default_scope desc(:unlock_date)
+  default_scope where(:unlock_date.gt => (Time.now.midnight - 1.day)).desc(:unlock_date).limit(5)
   
   field :unlock_date
   field :combination

@@ -1,3 +1,4 @@
 %ul
   - %w{bikes locations users reservations static_pages unlock_codes tickets}.each do |header|
     %li=  link_to header.gsub("_"," "), object_manage_path(header)
+  %li= link_to "mailer", notification_new_path

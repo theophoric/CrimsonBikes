@@ -28,6 +28,10 @@ Crimson2::Application.routes.draw do
     match ':_class/new'                   => :new            , :as => "object_new"
   end
   
+  scope :controller => :messages do
+    match 'notification_new' => :notification_new, :as => "notification_new"
+    match 'notification_send' => :notification_send, :as => "notification_send"
+  end
   
   
   # The priority is based upon order of creation:

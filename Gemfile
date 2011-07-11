@@ -32,3 +32,4 @@ gem "mongoid-paperclip", :require => "mongoid_paperclip"
 gem 'fastercsv'
 gem 'rest-client'
 gem 'gmaps4rails'
+gem 'google4r-checkout'

@@ -1,4 +1,6 @@
 - user = @object
+.span-24.border-bottom.align-left
+  = link_to "Index", object_manage_path("users")
 %h2= user.fullname
 .span-6
   %table
@@ -12,4 +14,14 @@
     = f.label :processed
     = f.select :processed, options_for_select([["True", true], ["False", false]])
     = f.submit
+.span-6.last
+  %h2 Reservations
+  %table
+    - for reservation in user.reservations do
+      - bike = reservation.bike
+      %tr
+        %td= reservation.expand_date
+        %td= link_to bike.name, object_edit_path("bikes", bike)
+        %td= link_to "Manage", object_edit_path("reservations", reservation)
+      
     
