@@ -32,8 +32,10 @@ class Reservation
   def clear_timeslots
     bike.timeslots.where(:reservation_id => _id).delete_all
   end
-
-
+  
+  def date
+    read_attribbute("date")
+  end
   
   # INSTANCE METHODS
 

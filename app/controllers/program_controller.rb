@@ -104,10 +104,10 @@ class ProgramController < ApplicationController
           confirmation = Notifier.reservation_confirmation(@reservation)
           confirmation.deliver
         else
-          message[:error] = "There was an error in your request"
+          message[:notice] = "There was an error in your request"
         end
       else
-        message[:error] = "You can only have one active reservation at a time with your current membership."
+        message[:notice] = "You can only have one active reservation at a time with your current membership."
       end
     else
       message[:notice] = "You must wait until your membership payment has been processed until you can reserve bikes."
