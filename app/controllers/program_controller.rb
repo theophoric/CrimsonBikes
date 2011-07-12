@@ -101,6 +101,8 @@ class ProgramController < ApplicationController
         @bike = Bike.find(@reservation.bike._id)    
         if @reservation.save && @bike.reserve(@reservation)
           message[:notice] = "Your reservation was successful"
+          confirmation = Notifier.reservation_confirmation(@reservation)
+          confirmation.deliver
         else
           message[:error] = "There was an error in your request"
         end
