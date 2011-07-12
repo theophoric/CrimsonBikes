@@ -20,10 +20,10 @@ class User
   field :name_first
   field :name_last
   field :phone
-  
+
   field :admin, :default => false
-  
   field :processed, :default => false
+  field :flagged, :type => Boolean, :default => false
   
   index :name_last
   index :email

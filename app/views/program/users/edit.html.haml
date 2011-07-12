@@ -13,6 +13,8 @@
   = form_for user, :url => object_update_path("users", user) do |f|
     = f.label :processed
     = f.select :processed, options_for_select([["True", true], ["False", false]])
+    = f.label :flagged
+    = f.select :flagged, options_for_select([["True", true], ["False", false]])
     = f.submit
 .span-6.last
   %h2 Reservations
@@ -23,5 +25,4 @@
         %td= reservation.expand_date
         %td= link_to bike.name, object_edit_path("bikes", bike)
         %td= link_to "Manage", object_edit_path("reservations", reservation)
-      
-    
+= link_to "Email This User", notification_new_path(:to => user._id)
