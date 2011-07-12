@@ -1,1 +1,3 @@
 = render 'program/static_pages/form'
+.span-24.align-right.border-top
+  = link_to "Delete", object_destroy_path("static_pages", @object._id)

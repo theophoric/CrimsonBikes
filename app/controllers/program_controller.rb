@@ -61,6 +61,7 @@ class ProgramController < ApplicationController
     @object = _class.classify.constantize.find(params[:id])
     @object.destroy
     if _class[Regexp.new("reservation", true)]
+      flash[:notice] = "#{_class.titleize} destroyed"
       redirect_to object_index_path(_class)
     else
       redirect_to object_manage_path(_class)  
