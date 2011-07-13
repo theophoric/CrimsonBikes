@@ -1,5 +1,5 @@
 - object ||= @object
-- url = (params[:action] == "edit" ? object_update_path(object.class.inspect, object._id) : object_create_path(object.class.inspect))
+- url = (params[:action] == "new" ? object_create_path(object.class.inspect) : object_update_path(object.class.inspect, object._id))
 .span-8
   %ul
     = form_for object, :url => url do |f|

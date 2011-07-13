@@ -58,7 +58,7 @@ class ProgramController < ApplicationController
   def destroy
     _class = params[:_class]
     authenticate_admin! unless _class[Regexp.new("reservation", true)]
-    @object = _class.classify.constantize.find(params[:id])
+    @object = _class.classify.constantize.find(params[:_id])
     @object.destroy
     if _class[Regexp.new("reservation", true)]
       flash[:notice] = "#{_class.titleize} destroyed"
