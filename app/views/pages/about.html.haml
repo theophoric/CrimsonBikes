@@ -3,9 +3,6 @@
     %ul
       - @pages.each_with_index do |page, index|
         %li.align-center= link_to page.title, "#tab-#{index}"
-      / - %w{ crimson_bikes how_to_register safety FAQ  }.each do |tab|
-      /        %li.align-center
-      /          = link_to tab.titleize, "#tab-#{tab}"
     - @pages.each_with_index do |page, index|
       %div{:id => "tab-#{index}"}
         = page.text.html_safe

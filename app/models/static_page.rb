@@ -9,4 +9,8 @@ class StaticPage
   field :_pos, :default => 0
   field :text
   
+  def self.retrieve user = OpenStruct.new(:admin? => false)
+    all
+  end
+  
 end

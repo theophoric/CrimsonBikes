@@ -31,7 +31,7 @@ class Bike
   validates_inclusion_of :_model, :in => %w{ mountain road }
   validates_inclusion_of :_size, :in => %w{ small medium large }
   
-  def self.retrieve user
+  def self.retrieve user = OpenStruct.new(:admin? => false)
     user.admin? ? all : opperational
   end
   

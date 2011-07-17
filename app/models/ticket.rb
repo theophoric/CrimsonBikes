@@ -15,5 +15,8 @@ class Ticket
   validates_inclusion_of :_priority_level, :in => 1..5
   validates_inclusion_of :_status, :in => %w{ open in_progress closed }
   
+  def self.retrieve user = OpenStruct.new(:admin? => false)
+    all
+  end
   
 end

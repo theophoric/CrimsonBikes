@@ -16,7 +16,7 @@ class Location
   validates_presence_of :name
   
   # CLASS METHODS
-  def self.retrieve user
+  def self.retrieve user = OpenStruct.new(:admin? => false)
     all
   end
   

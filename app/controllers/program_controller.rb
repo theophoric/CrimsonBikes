@@ -1,7 +1,8 @@
 class ProgramController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :authenticate_admin!, :except => [:index, :show, :home, :account, :reserve, :destroy]
-  
+  before_filter :authenticate_admin!, :except => %w{ index show home account reserve destroy }.map(&:to_sym)
+  before_filter :load_object,         :only => %w{ show new edit update destroy }.map(&:to_sym)
+  before_filter :load_collection,     :only => %w{ index manage }.map(&:to_sym)
   
   uses_tiny_mce :options => { 
                               :theme => "advanced",
@@ -14,35 +15,22 @@ class ProgramController < ApplicationController
   end
   
   def index
-    _class = params[:_class] || "Bike"
-    @objects = _class.classify.constantize.retrieve current_user
     render "program/#{_class.tableize}/index"
   end
   
   def show
-    _class = params[:_class]
-    _id = params[:_id]
-    @object = _class.classify.constantize.find(_id)
     render "program/#{_class.tableize}/show"
   end
   
   def new
-    _class = params[:_class]
-    @object = _class.classify.constantize.new
     render "program/#{_class.tableize}/new"
   end
   
   def edit
-    _class = params[:_class]
-    _id = params[:_id]
-    @object = _class.classify.constantize.find(_id)
     render "program/#{_class.tableize}/edit", :layout => 'admin'
   end
   
   def update
-    _class = params[:_class]
-    _id = params[:_id]
-    @object = _class.classify.constantize.find(_id)
     @object.update_attributes(params[_class.underscore])
     flash[:notice] = "#{_class.titleize} Updated"
     render "program/#{_class.tableize}/edit", :layout => 'admin'
@@ -56,34 +44,33 @@ class ProgramController < ApplicationController
   end
   
   def destroy
-    _class = params[:_class]
-    authenticate_admin! unless _class[Regexp.new("reservation", true)]
-    @object = _class.classify.constantize.find(params[:_id])
+    authenticate_admin! unless 
     @object.destroy
-    if _class[Regexp.new("reservation", true)]
-      flash[:notice] = "#{_class.titleize} destroyed"
+    if @object.class == Reservation
+      flash[:notice] = "Reservation has been canceled"
       redirect_to object_index_path(_class)
     else
       redirect_to object_manage_path(_class)  
     end
     
   end
+  # 
+  # def create_embedded
+  #   _parent = params[:_parent_class].classify.constantize
+  #   # @object = _parent.method(params[:])
+  #   
+  # end
+  # 
+  # def update_embedded
+  #   
+  # end
   
-  def create_embedded
-    _parent = params[:_parent_class].classify.constantize
-    # @object = _parent.method(params[:])
-    
-  end
-  
-  def update_embedded
-    
-  end
   
   def manage
-    _class = params[:_class]
-    @objects = _class.classify.constantize.page params[:page]
     render "program/#{_class.tableize}/manage", :layout => 'admin'
   end
+  
+  # MISC. 
   
   def admin
     
@@ -122,6 +109,20 @@ class ProgramController < ApplicationController
   def regenerate_combination
     @object = UnlockCode.find(params[:id])
     @object.update_attribute(:combination, UnlockCode.generate_combination)
+  end
+  
+  # GET OBJECT / COLLECTION FILTERS
+  private
+  def load_object
+    _id     = params[:id]
+    _class  = params[:_class]
+    object_class = _class.classify.constantize
+    @object ||= _id.nil ? object_class.new : object_class.find(params[:_id])
+  end
+  
+  def load_collection
+    _class = params[:_class]
+    @objects = _class.classify.constantize.retrieve current_user    
   end
   
 end

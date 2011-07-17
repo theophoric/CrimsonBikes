@@ -12,4 +12,9 @@ class Profile
   def fullname
     "#{name_first} #{name_last}"
   end
+  
+  def self.retrieve user = OpenStruct.new(:admin? => false)
+    all
+  end
+  
 end

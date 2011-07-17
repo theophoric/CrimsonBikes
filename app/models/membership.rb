@@ -7,4 +7,8 @@ class Membership
   
   validates_inclusion_of :_type, :in => %w{ premium standard guest }
   validates_inclusion_of :_payment_status, :in => %w{ pending processed }
+  
+  def self.retrieve user = OpenStruct.new(:admin? => false)
+    all
+  end
 end
