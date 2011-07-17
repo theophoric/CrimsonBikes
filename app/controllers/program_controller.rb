@@ -15,25 +15,25 @@ class ProgramController < ApplicationController
   end
   
   def index
-    render "program/#{_class.tableize}/index"
+    render "program/#{@_class.tableize}/index"
   end
   
   def show
-    render "program/#{_class.tableize}/show"
+    render "program/#{@_class.tableize}/show"
   end
   
   def new
-    render "program/#{_class.tableize}/new"
+    render "program/#{@_class.tableize}/new"
   end
   
   def edit
-    render "program/#{_class.tableize}/edit", :layout => 'admin'
+    render "program/#{@_class.tableize}/edit", :layout => 'admin'
   end
   
   def update
     @object.update_attributes(params[_class.underscore])
-    flash[:notice] = "#{_class.titleize} Updated"
-    render "program/#{_class.tableize}/edit", :layout => 'admin'
+    flash[:notice] = "#{@_class.titleize} Updated"
+    render "program/#{@_class.tableize}/edit", :layout => 'admin'
   end
   
   def create
@@ -115,14 +115,14 @@ class ProgramController < ApplicationController
   private
   def load_object
     _id     = params[:id]
-    _class  = params[:_class]
-    object_class = _class.classify.constantize
+    @_class  = params[:_class]
+    object_class = @_class.classify.constantize
     @object ||= _id.nil ? object_class.new : object_class.find(params[:_id])
   end
   
   def load_collection
-    _class = params[:_class]
-    @objects = _class.classify.constantize.retrieve current_user    
+    @_class = params[:_class]
+    @objects = @_class.classify.constantize.retrieve current_user    
   end
   
 end
