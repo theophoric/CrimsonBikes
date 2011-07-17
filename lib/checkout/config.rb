@@ -13,8 +13,8 @@ module CbCheckout
       define_method("#{name}?") { send(name) }
     end
     
-    option  :merchant_id  , :default => "123456789"
-    option  :merchant_key , :default => "test_key"
+    option  :merchant_id  , :default => "618974739863729"
+    option  :merchant_key , :default => "4zkYk_TKGOxSsalUuKTZAw"
     option  :use_sandbox      , :default => true
   end
 end

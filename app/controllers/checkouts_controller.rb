@@ -4,11 +4,8 @@ class CheckoutsController < ApplicationController
   before_filter :configuration, :load_frontend
   before_filter :verify_merchant_credentials, :only => [:process_response]
   def process_checkout
-    checkout_command = @frontend.create_checkout_command
-    checkout_command.shopping_cart.create_item(params{:membership_options})
-    checkout_command.shopping_cart.private_data= {:user_id => current_user._id}
-    response = checkout_command.send_to_google_checkout    
-    redirect_to response.redirect_url    
+    membership_type = (params[:membership_type] || "BASIC").upcase
+    redirect_to CbCheckout.transact(membership_type, current_user._id)
   end
   
   def process_response
