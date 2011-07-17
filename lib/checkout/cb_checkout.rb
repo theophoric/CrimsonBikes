@@ -19,7 +19,7 @@ module CbCheckout
       Google4R::Checkout::Frontend.new(config.settings)
     end
     
-    def transact membership_type = "BASIC", user_id
+    def transact membership_type = "BASIC", user_id = nil
       request_response = {:status => "fail", :redirect_url => "#{Rails.root}/"}
       # this part is messy...
       unless %w{ BASIC PREMIUM TRIAL }.include? membership_type.upcase
