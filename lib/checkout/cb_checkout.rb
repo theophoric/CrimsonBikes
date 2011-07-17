@@ -49,29 +49,7 @@ module CbCheckout
       puts checkout_command.to_xml
       response = checkout_command.send_to_google_checkout
       request_response = {:status => "sent", :redirect_url => response.redirect_url}
+      return request_response
     end
-    
-    def mypost
-      # Use your own merchant ID and Key, set use_sandbox to false for production
-      configuration2 = { :merchant_id => '618974739863729', :merchant_key => '4zkYk_TKGOxSsalUuKTZAw', :use_sandbox => true }
-      frontend = Google4R::Checkout::Frontend.new(configuration2)
-
-        # Create a new checkout command (to place an order)
-        cmd = frontend.create_checkout_command
-
-        # Add an item to the command's shopping cart
-        cmd.shopping_cart.create_item do |item|
-          item.name = "2-liter bottle of Diet Pepsi"
-          item.quantity = 100
-          item.unit_price = Money.new(1.99, "USD")
-        end
-
-        # Send the command to Google and capture the HTTP response
-        response = cmd.send_to_google_checkout
-
-        # Redirect the user to Google Checkout to complete the transaction
-        puts response.redirect_url
-    end
-    
   end
 end
