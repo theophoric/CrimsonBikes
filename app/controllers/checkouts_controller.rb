@@ -1,7 +1,7 @@
 require 'cb_checkout'
 
 class CheckoutsController < ApplicationController
-  before_filter :configuration, :load_frontend
+  # before_filter :configuration, :load_frontend
   before_filter :verify_merchant_credentials, :only => [:process_response]
   def process_checkout
     membership_type = (params[:membership_type] || "BASIC").upcase
@@ -47,7 +47,7 @@ class CheckoutsController < ApplicationController
     @configuration = {
       :merchant_id     => "618974739863729",
       :merchant_key    => "4zkYk_TKGOxSsalUuKTZAw",
-      :sandbox         => true
+      :use_sandbox         => true
     }
   end
   
