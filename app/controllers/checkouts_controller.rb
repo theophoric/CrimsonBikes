@@ -33,9 +33,8 @@ class CheckoutsController < ApplicationController
     # puts checkout_command.to_xml
     # response = checkout_command.send_to_google_checkout
     # redirect_to response.redirect_url
-    
-    
-    # redirect_to CbCheckout.transact(membership_type, current_user._id)
+    checkout_response = CbCheckout.transact(membership_type, current_user._id)
+    redirect_to checkout_response[:redirect_url]
   end
   
   def process_response
