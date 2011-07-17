@@ -50,12 +50,12 @@ class CheckoutsController < ApplicationController
 
     case notification
     when Google4R::Checkout::NewOrderNotification then
-
-      # handle a NewOrderNotification
+      puts "new"
+      puts  notification 
 
     when Google4R::Checkout::OrderStateChangeNotification then
-
-      # handle an OrderStateChangeNotification
+      puts "change"
+      puts notification
 
     else
       return head :text => "I don't know how to handle a #{notification.class}", :status => 500

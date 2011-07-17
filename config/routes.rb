@@ -34,6 +34,7 @@ Crimson2::Application.routes.draw do
   end
   
   scope :controller => :checkouts do
-    match 'process_checkout/:membership_type' => :process_checkout, :as => "process_checkout"
+    match 'process_checkout/:membership_type'   => :process_checkout, :as => "process_checkout"
+    match 'process_response'                    => :process_response, :as => "process_response"
   end
 end
