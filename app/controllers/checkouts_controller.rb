@@ -40,6 +40,7 @@ class CheckoutsController < ApplicationController
     handler = frontend.create_notification_handler
     begin
        notification = handler.handle(request.raw_post) # raw_post contains the XML
+       puts notification
     rescue Google4R::Checkout::UnknownNotificationType
        # This can happen if Google adds new commands and Google4R has not been
        # upgraded yet. It is not fatal.
