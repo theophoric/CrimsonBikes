@@ -4,34 +4,7 @@ class CheckoutsController < ApplicationController
   before_filter :verify_merchant_credentials, :only => [:process_response]
   def process_checkout
     membership_type = (params[:membership_type] || "BASIC").upcase
-    # # this part is messy...
-    # unless %w{ BASIC PREMIUM TRIAL }.include? membership_type.upcase
-    #   puts "error"
-    # end
-    # membership_options = {}
-    # case membership_type.upcase
-    # when "BASIC"
-    #   membership_options = CbCheckout::Membership::BASIC
-    # when "PREMIUM"
-    #   membership_options = CbCheckout::Membership::PREMIUM
-    # when "TRIAL"
-    #   membership_options = CbCheckout::Membership::TRIAL
-    # end
-    # puts "membership_options=#{membership_options}"
-    # @frontend = CbCheckout.init_frontend
-    # puts @frontend
-    # @frontend.tax_table_factory = CbCheckout::TaxTableFactory.new
-    # checkout_command = @frontend.create_checkout_command
-    # cart = checkout_command.shopping_cart
-    # cart.private_data= {:user_id => current_user._id}      
-    # cart.create_item do |item|
-    #   membership_options.each do |key, value|
-    #     item.method("#{key}=").call value
-    #   end
-    # end
-    # puts checkout_command.to_xml
-    # response = checkout_command.send_to_google_checkout
-    # redirect_to response.redirect_url
+
     checkout_response = CbCheckout.transact(membership_type, current_user._id)
     redirect_to checkout_response[:redirect_url]
   end
@@ -69,7 +42,7 @@ class CheckoutsController < ApplicationController
   # make sure the request authentication headers use the right merchant_id and merchant_key
   def verify_merchant_credentials
     authenticate_or_request_with_http_basic("Google Checkout notification endpoint") do |merchant_id, merchant_key|
-      (conf['merchant_id'].to_s == @configuration[:merchant_id]) and (conf['merchant_key'].to_s == @configuration[:merchant_key])
+      (CbCheckout::Config.merchant_id.to_s == merchant_id) and (CbCheckout::Config.merchant_key == merchant_key)
     end
   end
 end
