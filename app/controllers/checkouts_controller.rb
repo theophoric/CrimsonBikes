@@ -45,4 +45,8 @@ class CheckoutsController < ApplicationController
       (CbCheckout::Config.merchant_id.to_s == merchant_id) and (CbCheckout::Config.merchant_key == merchant_key)
     end
   end
+  
+  def frontend
+    CbCheckout.init_frontend
+  end
 end
