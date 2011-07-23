@@ -4,6 +4,7 @@ class User
   mount_uploader :avatar, ImageUploader
   
   has_many :reservations
+  has_many :memberships
   has_one :profile
   
   embeds_many :notes, :as => :notable

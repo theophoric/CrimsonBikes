@@ -15,23 +15,25 @@ class CheckoutsController < ApplicationController
     begin
        notification = handler.handle(request.raw_post) # raw_post contains the XML
        puts [notification.google_order_number, notification.shopping_cart].join("\t")
-       puts notification.shopping_cart.private_data
+       puts notification.shopping_cart.private_data["user_id"]
     rescue Google4R::Checkout::UnknownNotificationType
        # This can happen if Google adds new commands and Google4R has not been
        # upgraded yet. It is not fatal.
        logger.warn "Unknown notification type"
        return render :text => 'ignoring unknown notification type', :status => 200
     end
-
+    
+    shopping_cart = notification.shopping_cart
+    items = shopping_cart.items
+    puts items
+    user = User.find(shopping_cart.private_data["user_id"])
     case notification
     when Google4R::Checkout::NewOrderNotification then
-      puts "new"
-      puts  [notification.buyer_id, notification.google_order_number] 
-
+      "new"
+      # user.update_attribute(:processed, true)
+      # user.memberships.create(:_type => "basic", :_payment_status => "processed")
     when Google4R::Checkout::OrderStateChangeNotification then
-      puts "change"
-      puts notification
-
+      "changed?"
     else
       return head :text => "I don't know how to handle a #{notification.class}", :status => 500
     end
