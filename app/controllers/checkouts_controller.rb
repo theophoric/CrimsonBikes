@@ -29,11 +29,11 @@ class CheckoutsController < ApplicationController
     user = User.find(shopping_cart.private_data["user_id"])
     case notification
     when Google4R::Checkout::NewOrderNotification then
-      "new"
-      # user.update_attribute(:processed, true)
-      # user.memberships.create(:_type => "basic", :_payment_status => "processed")
+      puts "new order"
+      user.update_attribute(:processed, true)
+      user.memberships.create(:_type => "basic", :_payment_status => "processed")
     when Google4R::Checkout::OrderStateChangeNotification then
-      "changed?"
+      puts "order state changed"
     else
       return head :text => "I don't know how to handle a #{notification.class}", :status => 500
     end
@@ -46,7 +46,7 @@ class CheckoutsController < ApplicationController
   # make sure the request authentication headers use the right merchant_id and merchant_key
   def verify_merchant_credentials
     authenticate_or_request_with_http_basic("Google Checkout notification endpoint") do |merchant_id, merchant_key|
-      (CbCheckout::Config.merchant_id.to_s == merchant_id) and (CbCheckout::Config.merchant_key == merchant_key)
+      (CbCheckout::Config.merchant_id.to_s == merchant_id) and (CbCheckout::Config.merchant_key.to_s == merchant_key)
     end
   end
   
