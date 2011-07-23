@@ -34,9 +34,7 @@ module CbCheckout
       when "TRIAL"
         membership_options = Membership::TRIAL
       end
-      puts "membership_options=#{membership_options}"
       @frontend = init_frontend
-      puts @frontend
       @frontend.tax_table_factory = TaxTableFactory.new
       checkout_command = @frontend.create_checkout_command
       cart = checkout_command.shopping_cart
@@ -46,7 +44,6 @@ module CbCheckout
           item.method("#{key}=").call value
         end
       end
-      puts checkout_command.to_xml
       response = checkout_command.send_to_google_checkout
       request_response = {:status => "sent", :redirect_url => response.redirect_url}
       return request_response
