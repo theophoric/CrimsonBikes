@@ -34,7 +34,7 @@ class Reservation
   end
   
   def date
-    read_attribbute("date")
+    read_attribute("date")
   end
   
   # INSTANCE METHODS
