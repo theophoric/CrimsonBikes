@@ -31,7 +31,7 @@ class CheckoutsController < ApplicationController
     when Google4R::Checkout::NewOrderNotification then
       puts "new order"
       user.update_attribute(:processed, true)
-      user.memberships.create(:_type => "basic", :_payment_status => "processed")
+      user.memberships.create(:level => "basic", :_payment_status => "processed")
     when Google4R::Checkout::OrderStateChangeNotification then
       puts "order state changed"
     else
