@@ -1,8 +1,17 @@
 #account[current_user]
   .title= "Hello #{current_user.name_first}"
   .bold=" Membership status: #{current_user.processed ? "processed" : "unprocessed"}"
-  
-  .prepend-top.notice
-    %p
-      We will not be able to process online payments until June 30. You may register now, and on June 30 you will receive an email with details for how to complete your registration. If you would like to process your registration sooner, register now and bring your appropriate Membership Fee to the Leverett House guard's office (directions can be found on the Locations page).
-  
+  - unless current_user.processed
+    .prepend-top.notice.span-24
+      .span-22.basic
+        .span-18.f5.bold
+          Basic Membership: $20
+        .span-4.last
+          = link_to image_tag( "https://checkout.google.com/buttons/checkout.gif?merchant_id=&w=180&h=46&style=trans&variant=text&loc=en_US"), process_checkout_path("basic")
+      .span-22.premium
+        .span-18.f5.bold
+          Premium Membership: $35
+        .span-4.last
+          = image_tag "https://checkout.google.com/buttons/checkout.gif?merchant_id=&w=180&h=46&style=trans&variant=disabled&loc=en_US"
+        
+     
