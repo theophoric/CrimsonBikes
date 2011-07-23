@@ -2,7 +2,7 @@ $:.unshift(File.dirname(__FILE__))
 
 require 'rubygems'
 require 'config'
-require 'membership'
+require 'membership_type'
 require 'connect'
 require 'tax_table_factory'
 require 'google4r/checkout'
@@ -28,11 +28,11 @@ module CbCheckout
       membership_options = {}
       case membership_type.upcase
       when "BASIC"
-        membership_options = Membership::BASIC
+        membership_options = MembershipType::BASIC
       when "PREMIUM"
-        membership_options = Membership::PREMIUM
+        membership_options = MembershipType::PREMIUM
       when "TRIAL"
-        membership_options = Membership::TRIAL
+        membership_options = MembershipType::TRIAL
       end
       @frontend = init_frontend
       @frontend.tax_table_factory = TaxTableFactory.new
