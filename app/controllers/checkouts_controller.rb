@@ -2,6 +2,7 @@ require 'cb_checkout'
 
 class CheckoutsController < ApplicationController
   before_filter :verify_merchant_credentials, :only => [:process_response]
+  before_filter :authenticate_user!, :only => [:process_checkout]
   def process_checkout
     membership_type = (params[:membership_type] || "BASIC").upcase
 
@@ -24,7 +25,7 @@ class CheckoutsController < ApplicationController
     case notification
     when Google4R::Checkout::NewOrderNotification then
       puts "new"
-      puts  notification 
+      puts  [notification.buyer_id, notification.google_order_number, notification.private_data] 
 
     when Google4R::Checkout::OrderStateChangeNotification then
       puts "change"
