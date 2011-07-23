@@ -14,7 +14,8 @@ class CheckoutsController < ApplicationController
     handler = frontend.create_notification_handler
     begin
        notification = handler.handle(request.raw_post) # raw_post contains the XML
-       puts notification.to_xml
+       puts [notification.google_order_number, notification.shopping_cart].join("\t")
+       puts notification.shopping_cart.private_data
     rescue Google4R::Checkout::UnknownNotificationType
        # This can happen if Google adds new commands and Google4R has not been
        # upgraded yet. It is not fatal.
