@@ -48,11 +48,11 @@ class ProgramController < ApplicationController
   def destroy
     authenticate_admin! unless 
     @object.destroy
-    if @object.class == Reservation
+    if @_class == "Reservation"
       flash[:notice] = "Reservation has been canceled"
-      redirect_to object_index_path(_class)
+      redirect_to object_index_path(@_class)
     else
-      redirect_to object_manage_path(_class)  
+      redirect_to object_manage_path(@_class)  
     end
     
   end

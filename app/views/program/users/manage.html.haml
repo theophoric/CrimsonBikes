@@ -1,5 +1,13 @@
 - objects ||= @objects
 %table
+  %tr
+    %th= sortable "name_last", "Name"
+    %th= sortable "email"
+    %th= sortable "confirmed_at"
+    %th= sortable "processed", "Membership"
+    %th= sortable "last_sign_in_at"
+    %th= sortable "admin", "User Type"
+    %th Manage
   - for object in objects do
     %tr[object]
       %td= object.fullname

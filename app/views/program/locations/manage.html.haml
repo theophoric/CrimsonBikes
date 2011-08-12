@@ -1,6 +1,10 @@
 = link_to "Add #{params[:_class]}", object_new_path(params[:_class])
 / = paginate @objects
 %table 
+  %tr
+    %th
+    %th= sortable "name"
+    %th Bikes
   - for location in @objects do
     %tr
       %td= image_tag location.image.url("thumb") if location.image.url("thumb")
