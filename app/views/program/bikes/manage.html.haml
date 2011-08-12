@@ -1,6 +1,13 @@
 = link_to "Add Bike", object_new_path('bike')
-= paginate @objects
+/ = paginate @objects
 %table 
+  %tr
+    %th Image
+    %th= sortable "name"
+    %th= sortable "location_id", "Location"
+    %th= sortable "status"
+    %th Show
+    %th Edit
   - for bike in @objects do
     %tr
       %td= image_tag bike.image.url(:thumb) if bike.image.url("thumb")

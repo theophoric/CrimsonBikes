@@ -1,5 +1,7 @@
 class Location
   include Mongoid::Document
+  
+  include Sortable
 
   mount_uploader :image, ImageUploader
   
@@ -16,8 +18,18 @@ class Location
   validates_presence_of :name
   
   # CLASS METHODS
-  def self.retrieve user = OpenStruct.new(:admin? => false)
-    all
+  class << self
+    def retrieve user = OpenStruct.new(:admin? => false)
+      all
+    end
+    def search query = nil
+      if query
+        regex_query = Regexp.new(query, true)
+        any_of({:name => regex_query}, {:address => regex_query})
+      else
+        all
+      end
+    end
   end
   
 end

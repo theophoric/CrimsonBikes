@@ -2,6 +2,9 @@ class Ticket
   include Mongoid::Document
   include Mongoid::Timestamps
   
+  include Searchable
+  include Sortable
+  
   belongs_to :bike
   belongs_to :user
   
@@ -14,9 +17,5 @@ class Ticket
   
   validates_inclusion_of :_priority_level, :in => 1..5
   validates_inclusion_of :_status, :in => %w{ open in_progress closed }
-  
-  def self.retrieve user = OpenStruct.new(:admin? => false)
-    all
-  end
   
 end

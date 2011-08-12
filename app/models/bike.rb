@@ -3,6 +3,8 @@ class Bike
   include Mongoid::Timestamps
   include Mongoid::Taggable
   
+  include Sortable
+  
   mount_uploader :image, ImageUploader
   
   belongs_to :location
@@ -15,8 +17,8 @@ class Bike
   # embeds_many :images, :as => :imageable
   embeds_one :description, :as => :describeable
   
-  scope :opperational, where(:_status => "operational")
-  default_scope asc(:_identifier)
+  scope :operational, where(:_status => "operational")
+  default_scope desc(:name)
   
   field :name, :default => "New Bike"
   field :_model, :default => "road"
@@ -24,16 +26,13 @@ class Bike
   field :_identifier
   field :_size, :default => "medium"
   
-  index :_identifier, :unique => true
+  # index :_identifier, :unique => true
+  index :name
   
   validates_uniqueness_of :_identifier
   validates_inclusion_of :_status, :in => %w{ standby operational maintenance }
   validates_inclusion_of :_model, :in => %w{ mountain road }
   validates_inclusion_of :_size, :in => %w{ small medium large }
-  
-  def self.retrieve user = OpenStruct.new(:admin? => false)
-    user.admin? ? all : opperational
-  end
   
   def reserve(reservation)
     #unless timeslot.where(:time.within => [start..stop], :date => date).any?
@@ -56,6 +55,21 @@ class Bike
     #   data[key.to_sym] = value
     # end
     return data.to_options
+  end
+  
+  class << self
+    def retrieve user = OpenStruct.new(:admin? => false)
+      user.admin? ? all : operational
+    end
+    
+    def search query = nil
+      if query
+        regex_query = Regexp.new(query, true)
+        any_of({:name => regex_query}, {:_identifier => regex_query})
+      else
+        all
+      end
+    end
   end
   
 end

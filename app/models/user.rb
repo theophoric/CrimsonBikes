@@ -1,5 +1,7 @@
 class User
   include Mongoid::Document
+  
+  include Sortable
 
   mount_uploader :avatar, ImageUploader
   
@@ -16,7 +18,7 @@ class User
   
   scope :admins, where(:admin => true)
   
-  default_scope desc(:name_last)
+  default_scope asc(:name_last)
          
   field :name_first
   field :name_last
@@ -47,5 +49,21 @@ class User
   
   def fullname
     "#{name_last}, #{name_first}"
+  end
+  
+  class << self
+    
+    def retrieve user = OpenStruct.new(:admin? => false)
+      # user.admin? ? all : operational
+      all
+    end
+    def search query = nil
+      if query
+        regex_query = Regexp.new(query, true)
+        any_of({:name_first => regex_query}, {:name_last => regex_query}, {:email => regex_query})
+      else
+        all
+      end
+    end 
   end
 end

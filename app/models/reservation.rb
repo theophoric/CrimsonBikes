@@ -2,6 +2,9 @@ class Reservation
   include Mongoid::Document
   include Mongoid::Timestamps
   
+  include Searchable
+  include Sortable
+  
   belongs_to :user
   belongs_to :bike
   

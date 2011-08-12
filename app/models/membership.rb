@@ -2,6 +2,9 @@ class Membership
   include Mongoid::Document
   include Mongoid::Timestamps
   
+  include Searchable
+  include Sortable
+  
   belongs_to :user
   
   field :level, :default => "basic"
@@ -11,7 +14,5 @@ class Membership
   validates_inclusion_of  :_payment_status, :in => %w{ pending processed }
   validates_uniqueness_of :level, :scope => :user_id
   
-  def self.retrieve user = OpenStruct.new(:admin? => false)
-    all
-  end
+  
 end

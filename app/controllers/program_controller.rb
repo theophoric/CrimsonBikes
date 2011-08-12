@@ -4,6 +4,8 @@ class ProgramController < ApplicationController
   before_filter :load_object,         :only => %w{ show new edit update destroy }.map(&:to_sym)
   before_filter :load_collection,     :only => %w{ index manage }.map(&:to_sym)
   
+  helper_method :sort_field, :sort_direction
+  
   uses_tiny_mce :options => { 
                               :theme => "advanced",
                               :theme_advanced_buttons3 => "pasteword, fullscreen, fontsizeselect, separator, tablecontrols",
@@ -67,7 +69,7 @@ class ProgramController < ApplicationController
   
   
   def manage
-    render "program/#{_class.tableize}/manage", :layout => 'admin'
+    render "program/#{@_class.tableize}/manage", :layout => 'admin'
   end
   
   # MISC. 
@@ -107,22 +109,31 @@ class ProgramController < ApplicationController
   end
   
   def regenerate_combination
-    @object = UnlockCode.find(params[:id])
+    @object = UnlockCode.find(params[:_id])
     @object.update_attribute(:combination, UnlockCode.generate_combination)
   end
   
-  # GET OBJECT / COLLECTION FILTERS
+  
   private
   def load_object
-    _id     = params[:id]
+    _id     = params[:_id]
     @_class  = params[:_class]
     object_class = @_class.classify.constantize
-    @object ||= _id.nil ? object_class.new : object_class.find(params[:_id])
+    @object ||= _id.nil? ? object_class.new : object_class.find(params[:_id])
   end
   
   def load_collection
     @_class = params[:_class]
-    @objects = @_class.classify.constantize.retrieve current_user    
+    # @objects = @_class.classify.constantize.all.all.sort( sort_direction, sort_field).retrieve(current_user)
+    @objects = @_class.classify.constantize.sort_collection( sort_direction, sort_field).retrieve(current_user)
+  end
+  
+  def sort_field
+    params[:_class].classify.constantize.fields.include?( params[:sort_field] )? params[:sort_field] : nil
+  end  
+    
+  def sort_direction
+    %w{asc desc}.include?( params[:sort_direction]) ? params[:sort_direction] : "desc"
   end
   
 end
