@@ -1,1 +1,3 @@
 = render "program/locations/form"
+.span-22.border-top.align-right
+  = link_to "Destroy Bike", object_destroy_path("bike", @object._id), :confirm => "Confirm Delete?"
