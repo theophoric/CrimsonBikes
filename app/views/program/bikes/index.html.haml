@@ -115,7 +115,7 @@
   min: 12,
   max: 48,
   step: 1,
-  values: [parseInt("#{Time.now.hour < 6 ? 12 : Time.now.hour * 2}"), parseInt("#{Time.now.hour < 6 ? 14 : (Time.now.hour * 2 + 2)}") ],
+  values: [parseInt("#{Time.zone.now.hour < 6 ? 12 : Time.zone.now.hour * 2}"), parseInt("#{Time.zone.now.hour < 6 ? 14 : (Time.zone.now.hour * 2 + 2)}") ],
   slide: function(event, ui){
   var val_start = ui.values[0];
   var val_stop = ui.values[1];
@@ -135,8 +135,8 @@
   filter_timeslots();
   $('.day').text(($(this).val() < 1 ? "Today, " : "Tomorrow, "));
   });
-  var val_start = parseInt("#{Time.now.hour < 6 ? 12 : (Time.now.hour * 2)}");
-  var val_stop = parseInt("#{Time.now.hour < 6 ? 14 : (Time.now.hour * 2 + 2)}");
+  var val_start = parseInt("#{Time.zone.now.hour < 6 ? 12 : (Time.zone.now.hour * 2)}");
+  var val_stop = parseInt("#{Time.zone.now.hour < 6 ? 14 : (Time.zone.now.hour * 2 + 2)}");
   var start_hr = Math.floor(val_start / 2) % 12;
   var start_min = val_start % 2 == 0 ? "00" : "30";
   var start_offset = val_start < 24 ? " am" : " pm";

@@ -4,9 +4,9 @@ class UnlockCode
   include Searchable
   include Sortable
   
-  scope :expired, where(:unlock_date.lt => Time.now.midnight)
-  scope :future, where(:unlock_date.gt => Time.now.midnight)
-  default_scope where(:unlock_date.gt => (Time.now.midnight - 1.day)).desc(:unlock_date).limit(5)
+  scope :expired, where(:unlock_date.lt => Time.zone.now.midnight)
+  scope :future, where(:unlock_date.gt => Time.zone.now.midnight)
+  default_scope where(:unlock_date.gt => (Time.zone.now.midnight - 1.day)).desc(:unlock_date).limit(5)
   
   field :unlock_date
   field :combination
@@ -19,12 +19,12 @@ class UnlockCode
   
   class << self
     def get_current
-      first(:conditions => {:unlock_date.gte => Time.now.midnight})
+      first(:conditions => {:unlock_date.gte => Time.zone.now.midnight})
     end
   
     def generate num = 1
       members = UnlockCode.desc(:unlock_date)
-      date = members.any? ? (members.first.date + 1.day) : Time.now.midnight
+      date = members.any? ? (members.first.date + 1.day) : Time.zone.now.midnight
       num.times do
         UnlockCode.create do |code|
           code.unlock_date = date

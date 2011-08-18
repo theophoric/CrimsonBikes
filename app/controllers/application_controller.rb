@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   
-  helper_method :admin_user?, :current_usertype
+  helper_method :admin_user?, :current_usertype, :current_time, :current_date
   protect_from_forgery
   
   
@@ -22,5 +22,13 @@ class ApplicationController < ActionController::Base
     else
       "guest"
     end
+  end
+  
+  def current_time
+    Time.zone.now
+  end
+  
+  def current_date
+    current_time.to_date
   end
 end
