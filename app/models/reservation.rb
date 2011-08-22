@@ -12,7 +12,7 @@ class Reservation
   scope :tomorrow, where(:date => CbTime.tomorrow)
   scope :future, where(:date.gte => CbTime.today)
   scope :past, where(:date.lt => CbTime.today)
-  scope :unreminded, where(:reminder_sent => nil)
+  scope :unreminded, where(:reminder_sent_at => nil)
   # scope :future, where(:date)
   default_scope desc(:date, :start, :stop)
   
