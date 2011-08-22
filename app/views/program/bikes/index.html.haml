@@ -119,7 +119,7 @@
   slide: function(event, ui){
   var val_start = ui.values[0];
   var val_stop = ui.values[1];
-  var start_hr = Math.floor(val_start / 2) % 12;
+  var start_hr = Math.floor(val_start / 2 ) % 12;
   var start_min = val_start % 2 == 0 ? "00" : "30";
   var start_offset = (val_start < 24 || val_start > 47) ? " am" : " pm";
   var stop_hr = Math.floor(val_stop / 2) % 12;
