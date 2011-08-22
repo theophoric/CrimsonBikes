@@ -62,11 +62,15 @@
           %div.span-16[bike]{filter_data}
             .span-2
               .photo
-                = link_to bike.image.url("medium"), :class => "expandable", :title => bike.name do
-                  = image_tag bike.image.url("medium"), :size => "60x60"
+                = link_to bike.image.url, :class => "expandable", :title => bike.name do
+                  = image_tag bike.image.url("thumb"), :size => "60x60"
             .span-13.last
-              %span.bold= bike._identifier
-              = ", \"#{bike.name}\""
+              .span-13
+                .span-9.prepend-2.bold
+                  = "\"#{bike.name}\""
+                .span-2.last
+                  = link_to "#", :class => "reservation_link link", :onclick => "$('#new_reservation .main').html('#{escape_javascript(render :partial => 'program/bikes/bike_reservation', :locals => {:bike => bike})}');$('#new_reservation_link').click();" do  
+                    Reserve
               #bike_table.span-13
                 %table{:cellspacing => "0"}
                   %tbody
@@ -91,10 +95,7 @@
                       / %td{:colspan => "12"}
                       /   12am
                     %tr.hours
-                  
                       - ((12..47).to_a + (60..95).to_a).each{|i|haml_tag "td.timeslot-#{i}#{i % 2 == 0 ? ".even" : ".odd" }#{".final" if i == 47}#{(timeslot_array.include? "timeslot-#{i}") ? ".unavail" : ".avail"}"}
-              = link_to "#", :class => "reservation_link link", :onclick => "$('#new_reservation .main').html('#{escape_javascript(render :partial => 'program/bikes/bike_reservation', :locals => {:bike => bike})}');$('#new_reservation_link').click();" do  
-                Reserve
 .hidden
   #new_reservation
     .title
