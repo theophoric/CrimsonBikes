@@ -31,7 +31,7 @@ class UnlockCode
     end
   
     def generate num = 1
-      members = UnlockCode.desc(:unlock_date)
+      members = UnlockCode.where(:unlock_date.gte => Time.zone.now.utc.midnight).desc(:unlock_date)
       date = members.any? ? (members.first.unlock_date + 1.day) : Time.now.utc.midnight
       num.times do
         UnlockCode.create do |code|
