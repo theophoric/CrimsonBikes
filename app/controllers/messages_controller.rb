@@ -20,7 +20,7 @@ class MessagesController < ApplicationController
       user = User.find(recipient)
       if user
         notice_options = params[:notice_options].merge(:to => user.email)
-        notice = Notifier.send_notice(notice_options, params[:body], user)
+        notice = Notifier.send_notice(user, notice_options, params[:body])
         notice.deliver
       end
     end

@@ -3,6 +3,7 @@ class Notifier < ActionMailer::Base
   
   def send_unlock_code( reservation )
     @reservation = reservation
+    @bike = reservation.bike
     @user = reservation.user
     @unlock_code = UnlockCode.get_current
     mail(
@@ -21,7 +22,7 @@ class Notifier < ActionMailer::Base
     )
   end
   
-  def send_notice( notice_options = {}, notice_body = "", user = nil )
+  def send_notice( user, notice_options = {}, notice_body = "" )
     @user = user
     @text = notice_body
     mail(notice_options)
