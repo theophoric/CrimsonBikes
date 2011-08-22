@@ -4,7 +4,7 @@
     %th= sortable "name_last", "Name"
     %th= sortable "email"
     %th= sortable "confirmed_at"
-    %th= sortable "processed", "Membership"
+    %th= sortable "membership.level", "Membership"
     %th= sortable "last_sign_in_at"
     %th= sortable "admin", "User Type"
     %th Manage
@@ -13,7 +13,7 @@
       %td= object.fullname
       %td= object.email
       %td= object.confirmed_at
-      %td= "#{object.processed ? "processed" : "pending"}"
+      %td= object.membership_level
       %td= object.last_sign_in_at
       %td= "#{object.admin ? "admin" : "default"}"
       %td= link_to "Manage", object_edit_path("user", object)

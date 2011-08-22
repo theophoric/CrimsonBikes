@@ -6,10 +6,12 @@ class User
   mount_uploader :avatar, ImageUploader
   
   has_many :reservations
-  has_many :memberships
   has_one :profile
   
+  embeds_one :membership
   embeds_many :notes, :as => :notable
+  
+  after_create {create_membership}
   
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
@@ -25,7 +27,7 @@ class User
   field :phone
 
   field :admin, :default => false
-  field :processed, :default => false
+  # field :processed, :default => false
   field :flagged, :type => Boolean, :default => false
   
   index :name_last
@@ -34,6 +36,10 @@ class User
   validates_presence_of :name_first, :name_last, :phone
   validates_uniqueness_of :email, :case_sensitive => false
   attr_accessible :name_first, :name_last, :phone, :email, :password, :password_confirmation, :remember_me
+  
+  def membership_level
+    membership.level
+  end
   
   def admin?
     admin

@@ -1,6 +1,6 @@
 - objects ||= @objects
 = link_to "Add Page", object_new_path('static_pages')
-= paginate @objects
+/ = paginate @objects
 %table
   - for object in @objects do
     %tr[object]

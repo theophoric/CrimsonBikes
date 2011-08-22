@@ -11,10 +11,10 @@
     
 .span-6
   = form_for user, :url => object_update_path("users", user) do |f|
-    = f.label :processed
-    = f.select :processed, options_for_select([["True", true], ["False", false]])
+    = f.fields_for :membership do |membership_fields|
+      = membership_fields.select :level, options_for_select(%w{guest trial basic premium}, user.membership_level)
     = f.label :flagged
-    = f.select :flagged, options_for_select([["True", true], ["False", false]])
+    = f.select :flagged, options_for_select([["True", true], ["False", false]], user.flagged)
     = f.submit
 .span-6.last
   %h2 Reservations

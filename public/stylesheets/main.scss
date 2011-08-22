@@ -50,7 +50,10 @@ ul{
 }
 
 #header{
-	height:90px;
+	position:fixed;	
+	height:105px;
+	background:white;
+	z-index:10;
 	.icon{
 		height:100%;
 		background: url(../images/logo.png) no-repeat;
@@ -69,6 +72,9 @@ ul{
 	}
 }
 #main{
+	position:relative;
+	top:90px;	
+	
 }
 
 ul, ol{
@@ -109,7 +115,18 @@ a{
 		background-color:transparent;
 		color:#282828;
 	}
-
+	&.sortable{
+		padding-right:25px;
+	}
+	&.current{
+		color:$red;
+		&.asc{
+			background:url(../images/up_arrow.jpg) no-repeat right;
+		}
+		&.desc{
+			background:url(../images/down_arrow.jpg) no-repeat right;			
+		}
+	}
 }
 #about{
 	font-size:14px;
@@ -161,9 +178,7 @@ a{
 .align-center{text-align:center}
 .align-left{text-align:left}
 .align-right{text-align:right}
-.current{
-	color:$orange;
-}
+
 
 ul.sortable{
 	margin:0px;
@@ -417,7 +432,7 @@ ul.sortable{
     position:relative;
     width:645px; /* Change this to your images width */
     height:315px; /* Change this to your images height */
-    background:url(images/loading.gif) no-repeat 50% 50%;
+    background:url(../images/loading.gif) no-repeat 50% 50%;
 }
 #slider img {
     position:absolute;

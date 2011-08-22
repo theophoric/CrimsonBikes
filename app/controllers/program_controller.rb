@@ -54,7 +54,6 @@ class ProgramController < ApplicationController
     else
       redirect_to object_manage_path(@_class)  
     end
-    
   end
   # 
   # def create_embedded

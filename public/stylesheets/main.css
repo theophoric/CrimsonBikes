@@ -51,7 +51,10 @@ ul {
     font-size: 25px; }
 
 #header {
-  height: 90px; }
+  position: fixed;
+  height: 105px;
+  background: white;
+  z-index: 10; }
   #header .icon {
     height: 100%;
     background: url(../images/logo.png) no-repeat; }
@@ -62,6 +65,10 @@ ul {
       padding: 15px; }
       #header #navigation ul li a {
         font-size: 20px; }
+
+#main {
+  position: relative;
+  top: 90px; }
 
 ul, ol {
   margin: 0px;
@@ -96,6 +103,14 @@ a {
   a:hover {
     background-color: transparent;
     color: #282828; }
+  a.sortable {
+    padding-right: 25px; }
+  a.current {
+    color: #c12721; }
+    a.current.asc {
+      background: url(../images/up_arrow.jpg) no-repeat right; }
+    a.current.desc {
+      background: url(../images/down_arrow.jpg) no-repeat right; }
 
 #about {
   font-size: 14px; }
@@ -152,9 +167,6 @@ a {
 
 .align-right {
   text-align: right; }
-
-.current {
-  color: #f68a33; }
 
 ul.sortable {
   margin: 0px;
@@ -341,7 +353,7 @@ ul.sortable {
   /* Change this to your images width */
   height: 315px;
   /* Change this to your images height */
-  background: url(images/loading.gif) no-repeat 50% 50%; }
+  background: url(../images/loading.gif) no-repeat 50% 50%; }
 
 #slider img {
   position: absolute;

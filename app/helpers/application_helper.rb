@@ -14,8 +14,8 @@ module ApplicationHelper
   def sortable(field, title = nil)
     title ||= field.to_s.titleize
     direction = (field == sort_field && sort_direction == "asc") ? "desc" : "asc"
-    css_class = (field == sort_field) ? "#{direction} current" : nil
-    link_to title, object_manage_path(params[:_class], {:sort_field => field, :sort_direction => direction}, {:class => css_class})
+    css_class = (field == sort_field) ? "#{direction} current sortable" : nil
+    link_to title, object_manage_path(params[:_class], {:sort_field => field, :sort_direction => direction}), {:class => css_class}
   end
   
 end

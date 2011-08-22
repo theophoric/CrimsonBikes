@@ -38,7 +38,7 @@ module CbCheckout
       @frontend.tax_table_factory = TaxTableFactory.new
       checkout_command = @frontend.create_checkout_command
       cart = checkout_command.shopping_cart
-      cart.private_data= {:user_id => user_id}      
+      cart.private_data= {:user_id => user_id}
       cart.create_item do |item|
         membership_options.each do |key, value|
           item.method("#{key}=").call value

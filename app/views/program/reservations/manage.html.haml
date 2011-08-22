@@ -1,13 +1,18 @@
 - objects ||= @objects
-= paginate objects
+/ = paginate objects
 %table
+  %tr
+    %th "Bike"
+    %th= sortable "name_last", "User"
+    %th= sortable "date"
+    %th Time
+    %th Manage
   - for object in objects do
     - bike = object.bike
     - user = object.user
     %tr[object]
       %td= link_to bike.name, object_show_path("bike", bike)
-      %td= user.fullname 
-      %td= object.date.to_date
-      %td= object.start_time
-      %td= object.duration
-      %td= link_to "EDIT", object_edit_path("reservation", object)
+      %td= link_to user.fullname, object_edit_path("user", user)
+      %td= object.expand_date
+      %td= object.expand_time
+      %td= link_to "MANAGE", object_edit_path("reservation", object)
