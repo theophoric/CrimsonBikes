@@ -8,18 +8,18 @@ class Reservation
   belongs_to :user
   belongs_to :bike
   
-  scope :today, where(:date => Date.today)
-  scope :tomorrow, where(:date => Date.tomorrow)
-  scope :future, where(:date.gte => Date.today)
-  scope :past, where(:date.lt => Date.today)
-  scope :unreminded, where(:reminder_sent => false)
+  scope :today, where(:date => CbTime.today)
+  scope :tomorrow, where(:date => CbTime.tomorrow)
+  scope :future, where(:date.gte => CbTime.today)
+  scope :past, where(:date.lt => CbTime.today)
+  scope :unreminded, where(:reminder_sent => nil)
   # scope :future, where(:date)
   default_scope desc(:date, :start, :stop)
   
-  field :date,   :type => Time, :default => (Time.now)
+  field :date,   :type => Time
   field :start,  :type => Integer, :default => (Time.now.hour < 6 ? 12 : (Time.now.hour * 2))
   field :stop,   :type => Integer, :default => (Time.now.hour < 6 ? 14 : (Time.now.hour * 2 + 2))
-  field :reminder_sent, :type => Boolean, :default => false
+  field :reminder_sent_at, :type => Time
   
   index :date
   index :start
@@ -106,8 +106,10 @@ class Reservation
   end
   
   # CLASS METHODS
-  def self.retrieve user
-    user.admin? ? all : where(:user_id => user._id)
+  class << self
+    def retrieve user
+      user.admin? ? all : where(:user_id => user._id)
+    end
+    
   end
-  
 end

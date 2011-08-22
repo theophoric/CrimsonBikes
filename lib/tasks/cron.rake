@@ -7,7 +7,7 @@ task :cron => :environment do
   if reservations.any?
     reservations.each do |reservation|
       Notifier.send_unlock_code(reservation).deliver
-      reservation.update_attribute(:reminder_sent, true)
+      reservation.update_attribute(:reminder_sent_at, Time.zone.now)
     end
   end
 end
