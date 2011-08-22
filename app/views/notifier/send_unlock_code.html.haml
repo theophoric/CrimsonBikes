@@ -1,6 +1,8 @@
 %p= "Hello #{@user.fullname}."
 
-%p="  This email is to remind you of your CrimsonBikes reservation at #{@reservation.expand_time}.  Your bike #{@bike.name} can be picked up from #{@bike.location.name}.  The current combination is #{@unlock_code}."
+%p
+  = "  This email is to remind you of your CrimsonBikes reservation at #{@reservation.expand_time}.  Your bike #{@bike.name} can be picked up from #{@bike.location.name}.  The current combination is"
+  %b= "#{@unlock_code.combination}."
 %p
   Please email
   %a{:href => "mailto:info@crimsonbikes.org"} info@crimsonbikes.org 
