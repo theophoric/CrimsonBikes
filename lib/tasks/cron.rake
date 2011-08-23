@@ -4,7 +4,7 @@ task :cron => :environment do
     UnlockCode.generate
   end
   reservations = Reservation.today.unreminded.where(:start.lte => (Time.now.hour * 2 + (Time.now.min >= 30 ? 1 : 0) + 4))
-  puts reservation.count
+  puts reservations.count
   if reservations.any?
     reservations.each do |reservation|
       puts "sending reminder to #{reservation.user_id}"
