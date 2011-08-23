@@ -85,9 +85,9 @@ class ProgramController < ApplicationController
         day_offset = params[:day_offset].to_i
         date = CbTime.today + day_offset.days
         @reservation.date = date
-        @reservation.user_id = current_user._id    
-        @bike = Bike.find(@reservation.bike._id)    
-        if @reservation.save && @bike.reserve(@reservation)
+        @reservation.user_id = current_user._id
+        @bike = Bike.find(@reservation.bike._id)
+        if @reservation.save! && @bike.reserve(@reservation)
           message[:notice] = "Your reservation was successful"
           confirmation = Notifier.reservation_confirmation(@reservation)
           confirmation.deliver
