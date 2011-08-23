@@ -33,6 +33,8 @@
             = bike.location.name
           .span-4.last.unlock_code
             = unlock_code reservation
+        .span-16.botder-top.align-right
+          = link_to "Cancel Reservation", object_destroy_path("reservations", reservation), :confirm => "Are you sure you would like to cancel this reservation?"
           
 .hidden
   #unlock_code
