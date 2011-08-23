@@ -37,8 +37,12 @@ class User
   validates_uniqueness_of :email, :case_sensitive => false
   attr_accessible :name_first, :name_last, :phone, :email, :password, :password_confirmation, :remember_me
   
-  def membership_level
-    membership.level
+  # def membership_level
+  #     membership.level
+  #   end
+  
+  def active?
+    membership && membership.active
   end
   
   def admin?

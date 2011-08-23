@@ -1,17 +1,20 @@
 #account[current_user]
   .title= "Hello #{current_user.name_first}"
-  .bold=" Membership status: #{current_user.processed ? "processed" : "unprocessed"}"
-  - unless current_user.processed
-    .prepend-top.notice.span-24
+  .bold=" Membership status: #{current_user.active? ? "active" : "inactive"}"
+  .prepend-top.notice.span-24
+    - if current_user.active?
+      = "Membership expires #{current_user.membership.expiration_date}"
+    - else
       .span-22.basic
         .span-18.f5.bold
-          Basic Membership: $20
+          Fall Semester Membership: $20
         .span-4.last
-          = link_to image_tag( "https://checkout.google.com/buttons/checkout.gif?merchant_id=&w=180&h=46&style=trans&variant=text&loc=en_US"), process_checkout_path("basic")
-      .span-22.premium
-        .span-18.f5.bold
-          Premium Membership: $35
-        .span-4.last
-          = image_tag "https://checkout.google.com/buttons/checkout.gif?merchant_id=&w=180&h=46&style=trans&variant=disabled&loc=en_US"
+          = link_to image_tag( "https://checkout.google.com/buttons/checkout.gif?merchant_id=&w=180&h=46&style=trans&variant=text&loc=en_US"), process_checkout_path("half")
+      / .span-22.premium
+      /   .span-18.f5.bold
+      /     Full Year Membership: $35
+      /   .span-4.last
+      /     = image_tag "https://checkout.google.com/buttons/checkout.gif?merchant_id=&w=180&h=46&style=trans&variant=disabled&loc=en_US"
+      
         
      
