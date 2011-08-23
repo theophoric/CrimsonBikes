@@ -26,6 +26,9 @@ Crimson2::Application.routes.draw do
     match ':_class/create'                => :create         , :as => "object_create"
     match ':_class/manage'                => :manage         , :as => "object_manage"
     match ':_class/new'                   => :new            , :as => "object_new"
+    match ':_class/:_id/flag'             => :flag           , :as => "object_flag"
+    match 'create_admin/:_id'             => :create_admin   , :as => "create_admin"
+    match 'activate_account/:_id'         => :activate_account, :as => "activate_account"
   end
   
   scope :controller => :messages do

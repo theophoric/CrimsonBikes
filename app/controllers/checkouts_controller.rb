@@ -29,7 +29,7 @@ class CheckoutsController < ApplicationController
     when Google4R::Checkout::NewOrderNotification then
       puts "new order"
       # user.update_attribute(:processed, true)
-      user.membership.update_attribute(:active, true)
+      user.membership.update_attributes(:active => true, :activated_at => Time.now)
     when Google4R::Checkout::OrderStateChangeNotification then
       puts "order state changed"
     else

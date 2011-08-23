@@ -1,7 +1,7 @@
 class ProgramController < ApplicationController
   before_filter :authenticate_user!
   before_filter :authenticate_admin!, :except => %w{ index show home account reserve destroy }.map(&:to_sym)
-  before_filter :load_object,         :only => %w{ show new edit update destroy }.map(&:to_sym)
+  before_filter :load_object,         :only => %w{ show new edit update destroy flag}.map(&:to_sym)
   before_filter :load_collection,     :only => %w{ index manage }.map(&:to_sym)
   
   helper_method :sort_field, :sort_direction
@@ -33,9 +33,11 @@ class ProgramController < ApplicationController
   end
   
   def update
-    @object.update_attributes(params[_class.underscore])
+    @object.update_attributes(params[@_class.underscore.to_sym])
     flash[:notice] = "#{@_class.titleize} Updated"
-    render "program/#{@_class.tableize}/edit", :layout => 'admin'
+    redirect_to object_edit_path(@_class, @object)
+    
+    # "program/#{@_class.tableize}/edit", :layout => 'admin'
   end
   
   def create
@@ -46,7 +48,7 @@ class ProgramController < ApplicationController
   end
   
   def destroy
-    authenticate_admin! unless 
+    authenticate_admin! unless @_class =~ Regexp.new("reservation", true)
     @object.destroy
     if @_class =~ Regexp.new("reservation", true)
       flash[:notice] = "Reservation has been canceled"
@@ -101,6 +103,23 @@ class ProgramController < ApplicationController
       message[:notice] = "You must wait until your membership payment has been processed until you can reserve bikes."
     end
     redirect_to (object_index_path("bikes"), message)
+  end
+  
+  def flag
+    @object.update_attribute(:flagged, !@object.flagged)
+    redirect_to object_edit_path(@_class, @object)
+  end
+  
+  def create_admin
+    @object = User.find(params[:_id])
+    @object.update_attribute(:admin, true)
+    redirect_to object_edit_path("users", @object)
+  end
+  
+  def activate_account
+    @object = User.find(params[:_id])
+    @object.membership.activate
+    redirect_to object_edit_path("users", @object)
   end
   
   def account

@@ -31,4 +31,5 @@ class ApplicationController < ActionController::Base
   def current_date
     current_time.to_date
   end
+  
 end

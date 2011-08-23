@@ -35,7 +35,7 @@ class User
   
   validates_presence_of :name_first, :name_last, :phone
   validates_uniqueness_of :email, :case_sensitive => false
-  attr_accessible :name_first, :name_last, :phone, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name_first, :name_last, :phone, :email, :password, :password_confirmation, :remember_me, :admin, :flagged
   
   # def membership_level
   #     membership.level
@@ -77,3 +77,9 @@ class User
     end 
   end
 end
+# 
+# class Permission
+#   include Mongoid::Document
+#   
+#   embedded_in :user
+# end

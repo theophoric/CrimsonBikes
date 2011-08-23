@@ -1,28 +1,36 @@
-- user = @object
-.span-24.border-bottom.align-left
-  = link_to "Index", object_manage_path("users")
-%h2= user.fullname
-.span-6
-  %table
-    -%w{email phone processed sign_in_count last_sign_in_at }.each do |field|
-      %tr{:class => field}
-        %td.bold= field.titleize
-        %td= user.read_attribute(field)
-    
-.span-6
-  = form_for user, :url => object_update_path("users", user) do |f|
-    = f.fields_for :membership do |membership_fields|
-      = membership_fields.select :level, options_for_select(%w{guest trial basic premium}, user.membership_level)
-    = f.label :flagged
-    = f.select :flagged, options_for_select([["True", true], ["False", false]], user.flagged)
-    = f.submit
-.span-6.last
-  %h2 Reservations
-  %table
-    - for reservation in user.reservations do
-      - bike = reservation.bike
+%div[@object]{:class => "#{"frozen" if @object.flagged}"}
+  - user = @object
+  .span-24.border-bottom.align-left
+    = link_to "Index", object_manage_path("users")
+  %h2= user.fullname
+  .span-6
+    %table
+      -%w{email phone admin flagged sign_in_count last_sign_in_at }.each do |field|
+        %tr{:class => field}
+          %td.bold= field.titleize
+          %td= user.read_attribute(field)
       %tr
-        %td= reservation.expand_date
-        %td= link_to bike.name, object_edit_path("bikes", bike)
-        %td= link_to "Manage", object_edit_path("reservations", reservation)
-= link_to "Email This User", notification_new_path(:to => user._id)
+        %td.bold Membership Status
+        %td= user.active? ? "Active" : "Inactive"
+        
+  .span-6
+    .append-bottom
+      = link_to "#{user.flagged ? "Unfreeze" : "Freeze"} Account", object_flag_path("user", user), :class => "link", :confirm => "Are you sure that you want to freeze this user's account?  He/She will no longer be able to check out bikes until the issue is resolved."
+    .append-bottom
+      - if user.admin?
+        %h4 ADMIN
+      - else
+        = link_to "Make Admin", create_admin_path(user), :class => "link", :confirm => "Are you sure that you want to grant #{user.fullname} administrative privileges?"
+    - unless user.active?
+      %div
+        = link_to "Activate Account", activate_account_path(user), :class => 'link', :confirm => "Are you sure that you want to activate #{user.fullname}'s account?  Activation should happen automatically for users that have registered and payed through the site."
+  .span-6.last
+    %h2 Reservations
+    %table
+      - for reservation in user.reservations do
+        - bike = reservation.bike
+        %tr
+          %td= reservation.expand_date
+          %td= link_to bike.name, object_edit_path("bikes", bike)
+          %td= link_to "Manage", object_edit_path("reservations", reservation)
+  = link_to "Email This User", notification_new_path(:to => user._id)

@@ -19,12 +19,11 @@
       %li= f.label :_size
       %li= f.select(:_size, %w{ small medium large })
       %br      
-      %ul.radio
-        %li= label_tag "Location"
-        %li
-          - locations.each do |name, id|
-            = f.radio_button :location_id, id, :checked => (id == object.location_id ? "checked" : "unchecked")
-            = f.label "location_id_#{id}", name
+      %li= f.label :location_id
+      %li= f.select(:location_id, locations)
+      / - locations.each do |name, id|
+      /   = f.radio_button :location_id, id, :checked => (id == object.location_id ? "checked" : "unchecked")
+      /   = f.label "location_id_#{id}", name
       %br
       = f.fields_for :description do |description_fields|
         %li= description_fields.label :description
@@ -36,5 +35,3 @@
       %li= f.file_field :image
       %br
       %li= f.submit
-:javascript
-  $('input[name="bike[location_id]"]').first().attr("checked", "checked")

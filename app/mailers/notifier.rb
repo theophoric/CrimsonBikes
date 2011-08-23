@@ -1,6 +1,7 @@
 class Notifier < ActionMailer::Base
   default :from => "reservations@crimsonbikes.org"
   
+  
   def send_unlock_code( reservation )
     @reservation = reservation
     @bike = reservation.bike

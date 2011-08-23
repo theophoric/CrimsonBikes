@@ -1,0 +1,7 @@
+.span-4.border-bottom
+  = link_to_function "Cancel", "$('#fancybox-close').click();"
+= form_for @object, :url => object_update_path("users", @object) do |f|
+  = f.hidden_field :admin, :value => true
+  = f.submit "Confirm: Grant #{@object.fullname } Admin Privileges"
+
+  
