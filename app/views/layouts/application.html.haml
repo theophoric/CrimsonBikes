@@ -14,12 +14,12 @@
     .container
       #dialog
       #header.span-24
-        .span-6= link_to (image_tag "logo.jpg", :height=>100), root_path 
-        #navigation.span-18.last.bold.f3  
+        / .span-6= link_to (image_tag "logo.jpg", :height=>100), root_path 
+        #navigation.span-18.prepend-6.last.bold.f3  
           .span-8
             %ul
               %li= "Welcome, #{current_user.name_first}" if user_signed_in?
-          .span-10.last.align-right
+          .span-10.last.align-right.top
             %ul
               -if user_signed_in?
                 %li=link_to "[ sign out ]", destroy_user_session_path
@@ -28,7 +28,7 @@
               -else
                 %li=link_to "[ sign in ]", new_user_session_path, :class => ('active' if params[:controller] == 'devise/sessions')
                 %li=link_to "[ register ]", new_user_registration_path, :class => ('active' if params[:controller] == 'devise/registrations')
-          .span-18.last.border-top.bold.f5.prepend-top.align-right
+          .span-18.last.border-top.bold.f5.prepend-top.align-right.bottom
             = render :partial => "program/shared/navigation_#{user_signed_in? ? "member" : "guest"}"
       #main.prepend-top.span-24
         #content=yield
