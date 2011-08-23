@@ -83,7 +83,7 @@ class ProgramController < ApplicationController
       if current_user.reservations.future.none? 
         @reservation = Reservation.new(params[:reservation])
         day_offset = params[:day_offset].to_i
-        date = Reservation.today + day_offset.days
+        date = CbTime.today + day_offset.days
         @reservation.date = date
         @reservation.user_id = current_user._id    
         @bike = Bike.find(@reservation.bike._id)    

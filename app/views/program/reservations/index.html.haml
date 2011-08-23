@@ -33,9 +33,9 @@
             = bike.location.name
           .span-4.last.unlock_code
             = unlock_code reservation
-      - unless reservation.expired?
-        .span-15.border-top.align-right.append-1.last
-          = link_to "Cancel Reservation", object_destroy_path("reservations", reservation), :confirm => "Are you sure you would like to cancel this reservation?"
+        - unless reservation.expired?
+          .span-15.border-top.align-right.append-1.last
+            = link_to "Cancel Reservation", object_destroy_path("reservations", reservation), :confirm => "Are you sure you would like to cancel this reservation?"
           
 .hidden
   #unlock_code
