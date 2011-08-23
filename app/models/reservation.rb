@@ -32,6 +32,8 @@ class Reservation
   
   # CALLBACK METHODS
   
+
+  
   def clear_timeslots
     bike.timeslots.where(:reservation_id => _id).delete_all
   end
@@ -41,7 +43,9 @@ class Reservation
   end
   
   # INSTANCE METHODS
-
+  def expired?
+    date < CbTime.today || (date == CbTime.today && stop < Time.zone.now.hour * 2)
+  end
   
   def filter_data
     data = {:class => []}
