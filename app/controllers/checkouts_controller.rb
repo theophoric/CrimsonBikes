@@ -14,8 +14,8 @@ class CheckoutsController < ApplicationController
     handler = frontend.create_notification_handler
     begin
        notification = handler.handle(request.raw_post) # raw_post contains the XML
-       puts [notification.google_order_number, notification.shopping_cart].join("\t")
-       puts notification.shopping_cart.private_data["user_id"]
+       # puts [notification.google_order_number, notification.shopping_cart].join("\t")
+       # puts notification.shopping_cart.private_data["user_id"]
     rescue Google4R::Checkout::UnknownNotificationType
        logger.warn "Unknown notification type"
        return render :text => 'ignoring unknown notification type', :status => 200
