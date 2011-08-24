@@ -15,4 +15,8 @@ class PagesController < ApplicationController
   def blog
     
   end
+  
+  def how_it_works
+    
+  end
 end
