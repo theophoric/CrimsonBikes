@@ -16,6 +16,10 @@
     %br/
     = f.phone_field :phone, :placeholder => "Phone Number"  
   %p
+    = f.label :residence
+    %br/
+    = f.select :residence, options_for_select(["Adams","Kirkland", "Lowell", "Leverett", "Mather", "Quincy", "Dunster", "Winthrop", "Eliot", "Pforzheimer", "Currier", "Cabot", "The Yard", "Off Campus", "Dudley (Co-Op)"])
+  %p
     = f.label :email
     %br/
     = f.text_field :email, :placeholder => "Email"

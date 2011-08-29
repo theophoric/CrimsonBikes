@@ -9,7 +9,7 @@ Crimson2::Application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
   
-  config.action_mailer.default_url_options = { :host => 'crimson2.heroku.com' }
+  config.action_mailer.default_url_options = { :host => 'crimsonbikes.org' }
 
   # Specifies the header that your server uses for sending files
   config.action_dispatch.x_sendfile_header = "X-Sendfile"

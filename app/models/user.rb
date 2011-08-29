@@ -25,6 +25,7 @@ class User
   field :name_first
   field :name_last
   field :phone
+  field :residence
 
   field :admin, :default => false
   # field :processed, :default => false
@@ -35,7 +36,8 @@ class User
   
   validates_presence_of :name_first, :name_last, :phone
   validates_uniqueness_of :email, :case_sensitive => false
-  attr_accessible :name_first, :name_last, :phone, :email, :password, :password_confirmation, :remember_me, :admin, :flagged
+  attr_accessible :name_first, :name_last, :phone, :email, :password, :password_confirmation, :remember_me, :admin, :flagged, :residence
+  validates_inclusion_of :residence, :in => ["Adams","Kirkland", "Lowell", "Leverett", "Mather", "Quincy", "Dunster", "Winthrop", "Eliot", "Pforzheimer", "Currier", "Cabot", "The Yard", "Off Campus", "Dudley (Co-Op)"]
   
   # def membership_level
   #     membership.level
