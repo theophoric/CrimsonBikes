@@ -1,7 +1,7 @@
 #account[current_user]
   .title= "Hello #{current_user.name_first}"
   .bold=" Membership status: #{current_user.active? ? "active" : "inactive"}"
-  .prepend-top.notice.span-24
+  .prepend-top.span-24.notice
     - if current_user.active?
       = "Membership expires #{current_user.membership.expiration_date}"
     - else

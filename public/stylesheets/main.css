@@ -50,6 +50,10 @@ ul {
     line-height: 40px;
     font-size: 25px; }
 
+.notice {
+  padding: 0px;
+  margin-left: -2px; }
+
 #header {
   position: fixed;
   height: 200px;
