@@ -29,4 +29,12 @@ class Notifier < ActionMailer::Base
     mail(notice_options)
   end
   
+  def send_admin_unlock
+    @unlock_code = UnlockCode.get_current
+    mail(
+      :to       => "admin@crimsonbikes.org", 
+      :subject  => "Current Crimsonbikes Unlock Code"
+    )
+  end
+  
 end
