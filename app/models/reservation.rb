@@ -58,7 +58,7 @@ class Reservation
     else
       data[:time] = "current"
     end
-    data[:location] = bike.location.name.gsub(" ", "_").downcase if bike.location
+    data[:location] = bike.location.name.gsub(" ", "_").downcase if bike && bike.location
     # data[:model] = _model
     # data[:class] = c_array.join(" ")
     # description.attributes.each do |key, value|
