@@ -9,10 +9,11 @@
     %th Manage
   - for object in objects do
     - bike = object.bike
-    - user = object.user
-    %tr[object]
-      %td= link_to bike.name, object_show_path("bike", bike)
-      %td= link_to user.fullname, object_edit_path("user", user)
-      %td= object.expand_date
-      %td= object.expand_time
-      %td= link_to "MANAGE", object_edit_path("reservation", object)
+    - unless bike.nil?
+      - user = object.user
+      %tr[object]
+        %td= link_to bike.name, object_show_path("bike", bike)
+        %td= link_to user.fullname, object_edit_path("user", user)
+        %td= object.expand_date
+        %td= object.expand_time
+        %td= link_to "MANAGE", object_edit_path("reservation", object)
