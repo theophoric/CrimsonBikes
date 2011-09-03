@@ -29,8 +29,9 @@
     %table
       - for reservation in user.reservations do
         - bike = reservation.bike
-        %tr
-          %td= reservation.expand_date
-          %td= link_to bike.name, object_edit_path("bikes", bike)
-          %td= link_to "Manage", object_edit_path("reservations", reservation)
+        - unless bike.nil?
+          %tr
+            %td= reservation.expand_date
+            %td= link_to bike.name, object_edit_path("bikes", bike)
+            %td= link_to "Manage", object_edit_path("reservations", reservation)
   = link_to "Email This User", notification_new_path(:to => user._id)
