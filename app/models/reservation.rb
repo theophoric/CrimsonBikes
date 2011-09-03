@@ -112,8 +112,8 @@ class Reservation
   # CLASS METHODS
   class << self
     def retrieve user
-      user.reservations
-      # user.admin? ? all : where(:user_id => user._id)
+      # user.reservations
+      user.admin? ? all : where(:user_id => user._id)
     end
     
   end
