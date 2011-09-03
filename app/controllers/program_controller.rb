@@ -93,7 +93,7 @@ class ProgramController < ApplicationController
           message[:notice] = "Your reservation was successful"
           confirmation = Notifier.reservation_confirmation(@reservation)
           confirmation.deliver
-          if @reservation.start <= (Time.now.hour * 2 + (Time.now.min >= 30 ? 1 : 0) + 4)
+          if @reservation.start <= (Time.zone.now.hour * 2 + (Time.zone.now.min >= 30 ? 1 : 0) + 4) 
             Notifier.send_unlock_code(@reservation).deliver
             @reservation.update_attribute(:reminder_sent_at, Time.zone.now)
           end
