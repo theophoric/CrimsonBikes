@@ -31,7 +31,7 @@ class Bike
   
   validates_uniqueness_of :_identifier
   validates_inclusion_of :_status, :in => %w{ standby operational maintenance }
-  validates_inclusion_of :_model, :in => %w{ mountain road }
+  validates_inclusion_of :_model, :in => %w{ mountain street }
   validates_inclusion_of :_size, :in => %w{ small medium large }
   
   def reserve(reservation)
