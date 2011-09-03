@@ -12,7 +12,7 @@
     %tr
       %td= image_tag bike.image.url(:thumb) if bike.image.url("thumb")
       %td= bike.name
-      %td= link_to bike.location.name, object_show_path("location", bike.location)
+      %td= link_to bike.location.name, object_show_path("location", bike.location) if bike.location
       %td= bike._status
       %td= link_to "Show", object_show_path("bike", bike)
       %td= link_to "Edit", object_edit_path("bike", bike)
