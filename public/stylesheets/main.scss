@@ -54,6 +54,9 @@ ul{
 	position:fixed;	
 	height:200px;
 	background:white url(../images/website_bg_final.png) no-repeat;
+	&.admin{
+		background:white;
+	}
 	z-index:10;
 	
 	// .icon{

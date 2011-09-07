@@ -59,6 +59,8 @@ ul {
   height: 200px;
   background: white url(../images/website_bg_final.png) no-repeat;
   z-index: 10; }
+  #header.admin {
+    background: white; }
   #header #navigation {
     margin-top: 10px; }
     #header #navigation .bottom {

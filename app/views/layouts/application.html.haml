@@ -10,7 +10,7 @@
     = csrf_meta_tag
     = yield :head
     %meta{ :name=>"google-site-verification", :content=>"PHinRMSVsO9a8OttdPTiy3WmK3r_QA1DEhsExj4Ccp4"}
-  %body
+  %body.default
     .container
       #dialog
       #header.span-24
@@ -33,8 +33,8 @@
       #main.prepend-top.span-24
         #content=yield
       #footer= yield :footer
-    #loading.spinner
-      = image_tag "loader.gif"
+    / #loading.spinner
+    /   = image_tag "loader.gif"
 - if flash[:notice]
   :javascript
     $('#dialog').attr("title", "Notice").html("#{flash[:notice]}").dialog();

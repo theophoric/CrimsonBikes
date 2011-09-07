@@ -13,7 +13,7 @@
   %body
     .container
       #dialog
-      #header.span-24
+      #header.span-24.admin
         #navigation.span-24.last.bold.f3
           .span-8
             %ul
@@ -32,8 +32,8 @@
       #main.prepend-top.span-24
         #content=yield
       #footer= yield :footer
-    #loading.spinner
-      = image_tag "loader.gif"
+    / #loading.spinner
+    /   = image_tag "loader.gif"
 - if flash[:notice]
   :javascript
     $('#dialog').attr("title", "Notice").html("#{flash[:notice]}").dialog();
