@@ -37,7 +37,7 @@ class User
   validates_presence_of :name_first, :name_last, :phone
   validates_uniqueness_of :email, :case_sensitive => false
   attr_accessible :name_first, :name_last, :phone, :email, :password, :password_confirmation, :remember_me, :admin, :flagged, :residence
-  validates_inclusion_of :residence, :in => ["Adams","Kirkland", "Lowell", "Leverett", "Mather", "Quincy", "Dunster", "Winthrop", "Eliot", "Pforzheimer", "Currier", "Cabot", "The Yard", "Off Campus", "Dudley (Co-Op)"]
+  validates_inclusion_of :residence, :in => [ "Adams","Kirkland", "Lowell", "Leverett", "Mather", "Quincy", "Dunster", "Winthrop", "Eliot", "Pforzheimer", "Currier", "Cabot", "The Yard", "Off Campus", "Dudley (Co-Op)", nil ]
   
   # def membership_level
   #     membership.level

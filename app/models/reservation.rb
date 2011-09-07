@@ -35,7 +35,7 @@ class Reservation
 
   
   def clear_timeslots
-    bike.timeslots.where(:reservation_id => _id).delete_all
+    bike.timeslots.where(:reservation_id => _id).delete_all unless bike.nil?
   end
   
   def date
