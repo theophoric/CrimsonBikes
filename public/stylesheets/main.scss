@@ -43,6 +43,13 @@ body{
 	// background:#f5f5f5 url(../images/background.png) repeat-x;
 	background:#9dc6e9;
 }
+.feedback-div {
+        padding: 20px;
+        width: 250px;
+        background: #ccc;
+        border: 1px solid #29216d;
+    }
+
 ul{
 	text-align:left;
 	&.large{

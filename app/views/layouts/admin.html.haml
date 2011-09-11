@@ -32,8 +32,6 @@
       #main.prepend-top.span-24
         #content=yield
       #footer= yield :footer
-    / #loading.spinner
-    /   = image_tag "loader.gif"
 - if flash[:notice]
   :javascript
     $('#dialog').attr("title", "Notice").html("#{flash[:notice]}").dialog();

@@ -5,12 +5,19 @@
     = stylesheet_link_tag "uploadify","blueprint-css/blueprint/screen",'../javascripts/fancybox/jquery.fancybox-1.3.4', "jquery-ui-1.8.11.custom", "nivo-slider/nivo-slider", "nivo-slider/themes/default/default"
     = stylesheet_link_tag :all
     = javascript_include_tag :defaults
-    = javascript_include_tag "jquery.dragsort-0.4.2.min", "jquery-ui-1.8.11.custom.min", 'fancybox/jquery.mousewheel-3.0.4.pack.js', 'fancybox/jquery.fancybox-1.3.4.pack.js', 'jwplayer/jwplayer', "jquery.isotope.min", 'jquery.nivo.slider.pack'
+    = javascript_include_tag "jquery.dragsort-0.4.2.min", "jquery-ui-1.8.11.custom.min", 'fancybox/jquery.mousewheel-3.0.4.pack.js', 'fancybox/jquery.fancybox-1.3.4.pack.js', 'jwplayer/jwplayer', "jquery.isotope.min", 'jquery.nivo.slider.pack', 'jquery.tabSlideOut.v1.3'
     = include_tiny_mce_if_needed
     = csrf_meta_tag
     = yield :head
-    %meta{ :name=>"google-site-verification", :content=>"PHinRMSVsO9a8OttdPTiy3WmK3r_QA1DEhsExj4Ccp4"}
+
   %body.default
+    .feedback-div
+      %a.handle Feedback
+      = form_for :feedback, :url => feedback_send_path do |f|
+        = f.text_area :body
+        = f.label :anonymous, "Submit Anonymously"
+        = f.check_box :anonymous
+        .prepend-top= f.submit "Submit Feedback"
     .container
       #dialog
       #header.span-24
@@ -33,8 +40,8 @@
       #main.prepend-top.span-24
         #content=yield
       #footer= yield :footer
-    / #loading.spinner
-    /   = image_tag "loader.gif"
+
+%meta{ :name=>"google-site-verification", :content=>"PHinRMSVsO9a8OttdPTiy3WmK3r_QA1DEhsExj4Ccp4"}
 - if flash[:notice]
   :javascript
     $('#dialog').attr("title", "Notice").html("#{flash[:notice]}").dialog();

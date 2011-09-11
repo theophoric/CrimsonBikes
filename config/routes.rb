@@ -33,8 +33,9 @@ Crimson2::Application.routes.draw do
   end
   
   scope :controller => :messages do
-    match 'notification_new' => :notification_new, :as => "notification_new"
+    match 'notification_new'  => :notification_new, :as => "notification_new"
     match 'notification_send' => :notification_send, :as => "notification_send"
+    match 'feedback_send'     => :feedback_send, :as => "feedback_send"
   end
   
   scope :controller => :checkouts do

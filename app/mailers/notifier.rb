@@ -37,4 +37,13 @@ class Notifier < ActionMailer::Base
     )
   end
   
+  def send_feedback( email = "anonymous@feedback.message", feedback_body = "")
+    @body = feedback_body
+    mail(
+      :to     => "info@crimsonbikes.org",
+      :from   => email,
+      :subject=> "CrimsonBikes Website Feedback"
+    )
+  end
+  
 end

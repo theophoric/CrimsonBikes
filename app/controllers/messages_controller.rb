@@ -28,5 +28,13 @@ class MessagesController < ApplicationController
     redirect_to :notification_new
   end
   
+  def feedback_send
+    email = ((user_signed_in? && params[:feedback][:anonymous] == 0) ? current_user.email : "anonymous@feedback.message"
+    feedback = Notifier.send_feedback(email, params[:feedback][:body]))
+    feedback.deliver
+    flash[:notice] = "Thank you for submitting your feedback to crimsonbikes"
+    redirect_to root_path
+  end
+  
   
 end

@@ -44,6 +44,12 @@ body {
   text-align: left;
   background: #9dc6e9; }
 
+.feedback-div {
+  padding: 20px;
+  width: 250px;
+  background: #ccc;
+  border: 1px solid #29216d; }
+
 ul {
   text-align: left; }
   ul.large {
