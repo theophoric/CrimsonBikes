@@ -10,16 +10,18 @@ class Reservation
   
   scope :today, where(:date => CbTime.today)
   scope :tomorrow, where(:date => CbTime.tomorrow)
-  scope :future, where(:date.gte => CbTime.today)
-  scope :past, where(:date.lt => CbTime.today)
+  scope :future, any_of({:date.gt => CbTime.today}, {:date => CbTime.today, :stop.gte => (Time.zone.now.hour * 2)})
+  scope :past, any_of({:date.lt => CbTime.today}, {:date => CbTime.today, :stop.lt => (Time.zone.now.hour * 2)})
   scope :unreminded, where(:reminder_sent_at => nil)
   # scope :future, where(:date)
   default_scope desc(:date, :start, :stop)
   
   field :date,   :type => Time
-  field :start,  :type => Integer, :default => (Time.now.hour < 6 ? 12 : (Time.now.hour * 2))
-  field :stop,   :type => Integer, :default => (Time.now.hour < 6 ? 14 : (Time.now.hour * 2 + 2))
+  field :start,  :type => Integer, :default => (Time.zone.now.hour < 6 ? 12 : (Time.zone.now.hour * 2))
+  field :stop,   :type => Integer, :default => (Time.zone.now.hour < 6 ? 14 : (Time.zone.now.hour * 2 + 2))
   field :reminder_sent_at, :type => Time
+  
+
   
   index :date
   index :start

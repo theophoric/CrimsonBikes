@@ -127,9 +127,9 @@
   var stop_min = val_stop % 2 == 0 ? "00" : "30";
   var stop_offset = (val_stop < 24 || val_stop > 47) ? " am" : " pm";
   $('.times').text((start_hr == 0 ? 12 : start_hr) + ":" + start_min + start_offset + " - " + (stop_hr == 0 ? 12 : stop_hr) + ":" + stop_min + stop_offset);
-  filter_timeslots();
   $('#reservation_start').val(val_start);
   $('#reservation_stop').val(val_stop);
+  filter_timeslots();
   }
   });
   $('input[name="day_offset"]').change(function(){
@@ -145,5 +145,7 @@
   var stop_min = val_stop % 2 == 0 ? "00" : "30";
   var stop_offset = val_stop < 24 ? " am" : " pm";
   $('.times').text((start_hr == 0 ? 12 : start_hr) + ":" + start_min + start_offset + " - " + (stop_hr == 0 ? 12 : stop_hr) + ":" + stop_min + stop_offset);
+  $('#reservation_start').val(val_start);
+  $('#reservation_stop').val(val_stop);
   filter_timeslots();
   });

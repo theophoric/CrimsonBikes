@@ -27,8 +27,10 @@ $(document).ready(function(){
 
 function filter_timeslots(){
 	var day_offset		=	parseInt($('input[name=day_offset]:checked').val()) * 48;
-	var start			=	parseInt($('#time_picker').slider("values", 0)) + day_offset;
-	var stop			=	parseInt($('#time_picker').slider("values", 1)) + day_offset;
+	// var start			=	parseInt($('#time_picker').slider("values", 0)) + day_offset;
+	// 	var stop			=	parseInt($('#time_picker').slider("values", 1)) + day_offset;
+	var start			=	parseInt($('#reservation_start').val()) + day_offset;
+	var stop			=	parseInt($('#reservation_stop').val()) + day_offset;	
 	if (start != stop){
 		var $optionSet = $('#filters_container .filter .selected');
 		var $container = $("#objects_container");
@@ -40,7 +42,7 @@ function filter_timeslots(){
 
 		var selector = isoFilters.join("");
 		$container.isotope({filter : selector});
-		if ((stop- start) > 16){
+		if ((stop - start) > 16){
 			$('.flag').addClass("illegal");
 			$('.message').html('<div class="error">Your reservation cannot exceed 8 hours.</div>');
 			$('.reservation_link').button({disabled:true});

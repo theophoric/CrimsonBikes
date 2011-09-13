@@ -82,7 +82,7 @@ class ProgramController < ApplicationController
   def reserve
     message = {}
     if current_user.active?
-      if current_user.reservations.future.none? 
+      if current_user.reservations.future.none?
         @reservation = Reservation.new(params[:reservation])
         day_offset = params[:day_offset].to_i
         date = CbTime.today + day_offset.days
