@@ -1,16 +1,16 @@
 - object ||= @object
 - locations = Location.all.collect{|location|[location.name, location.id]}
-= form_for object, :url => object_create_path(object.class.inspect), :html => {:multipart => true} do |f|
+= form_for object, :url => (object.persisted? ? object_update_path(object.class.inspect, object._id) : object_create_path(object.class.inspect)), :html => {:multipart => true} do |f|
   %ul
-    %li= f.label :name
-    %li= f.text_field :name
+    - unless object.persisted?
+      %li= f.label :name
+      %li= f.text_field :name
     %br
     %li= f.label :address
     %li= f.text_field :address
     %br
-    = f.fields_for :description do |description_fields|
-      %li= description_fields.label :about
-      %li= description_fields.text_area :about
+    %li= f.label :description
+    %li= f.text_area :description, :value => object.description
     %br
     %li= f.label :image, "Image"
     - if object.image_filename

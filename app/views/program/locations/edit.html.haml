@@ -1,3 +1,6 @@
-= render "program/locations/form"
+.span-22.border-bottom.align-center
+  %h2= @object.name.titleize
+.span-22.prepend-1.append-1  
+  = render "program/locations/form"
 .span-22.border-top.align-right
   = link_to "Destroy Location", object_destroy_path("location", @object._id), :confirm => "Confirm Delete?"
