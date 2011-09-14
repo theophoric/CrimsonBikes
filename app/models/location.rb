@@ -15,6 +15,7 @@ class Location
   field :name
   field :address
   field :description, :default => ""
+  field :instructions, :default => ""
   
   validates_presence_of :name
   validates_uniqueness_of :name

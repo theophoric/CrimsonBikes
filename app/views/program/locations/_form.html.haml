@@ -12,6 +12,9 @@
     %li= f.label :description
     %li= f.text_area :description, :value => object.description
     %br
+    %li= f.label :instructions
+    %li= f.text_area :instructions
+    %br
     %li= f.label :image, "Image"
     - if object.image_filename
       %li= image_tag object.image.url(:thumb)
