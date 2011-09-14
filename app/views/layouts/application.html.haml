@@ -14,7 +14,7 @@
     .feedback-div
       %a.handle Feedback
       = form_for :feedback, :url => feedback_send_path do |f|
-        = f.text_area :body
+        = f.text_area :body, :cols => 30
         = f.label :anonymous, "Submit Anonymously"
         = f.check_box :anonymous
         .prepend-top= f.submit "Submit Feedback"
