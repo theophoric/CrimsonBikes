@@ -1,6 +1,7 @@
 class ProgramController < ApplicationController
   before_filter :authenticate_user!
   before_filter :authenticate_admin!, :except => %w{ index show home account reserve destroy }.map(&:to_sym)
+  before_filter :authenticate_valid!
   before_filter :load_object,         :only => %w{ show new edit update destroy flag}.map(&:to_sym)
   before_filter :load_collection,     :only => %w{ index manage }.map(&:to_sym)
   

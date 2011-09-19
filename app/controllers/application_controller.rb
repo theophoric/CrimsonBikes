@@ -12,6 +12,13 @@ class ApplicationController < ActionController::Base
     user_signed_in? && current_user.admin?
   end
   
+  def authenticate_valid!
+    if user_signed_in? && current_user.flagged
+      flash[:notice] = "ERROR:  Your account has been frozeb by a CrimsonBikes administrator.  If uou believe this message to be in error, please contact info@crimsonbikes.org to resolve the issue."
+      redirect_to( destroy_user_session_path)
+    end
+  end
+  
   def current_usertype
     if user_signed_in?
       if current_user.admin?
@@ -31,5 +38,7 @@ class ApplicationController < ActionController::Base
   def current_date
     current_time.to_date
   end
+  
+
   
 end
