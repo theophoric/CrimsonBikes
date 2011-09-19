@@ -6,7 +6,7 @@ class Notifier < ActionMailer::Base
     @reservation = reservation
     @bike = reservation.bike
     @user = reservation.user
-    @unlock_code = UnlockCode.get_current
+    @unlock_code = UnlockCode.get_current @reservation.date
     @instructions = @bike.location.instructions unless @bike.location.nil?
     mail(
       :to       => @user.email,
