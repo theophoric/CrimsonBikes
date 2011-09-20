@@ -26,8 +26,9 @@ class UnlockCode
   
   class << self
     def get_current date = Time.zone.now.utc.midnight
-      generate unless where(:unlock_date.gte => date).any?
-      last(:conditions => {:unlock_date.gte => date})
+      date = date.utc.midnight
+      generate unless where(:unlock_date => date).any?
+      first(:conditions => {:unlock_date => date})
     end
   
     def generate num = 1
