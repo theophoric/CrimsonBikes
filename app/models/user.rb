@@ -38,7 +38,7 @@ class User
   validates_uniqueness_of :email, :case_sensitive => false
   attr_accessible :name_first, :name_last, :phone, :email, :password, :password_confirmation, :remember_me, :admin, :flagged, :residence
   validates_inclusion_of :residence, :in => [ "Adams","Kirkland", "Lowell", "Leverett", "Mather", "Quincy", "Dunster", "Winthrop", "Eliot", "Pforzheimer", "Currier", "Cabot", "The Yard", "Off Campus", "Dudley (Co-Op)", nil ]
-  validates_format_of :email, :with => /^([\w\.%\+\-]+)@((college|fas|post)\.harvard|hbs)\.edu$/i, :message => "You must have a valid harvard.edu or hbs.edu email address to register."
+  validates_format_of :email, :with => /^([\w\.%\+\-]+)@([a-z]*\.harvard|harvard|hbs)\.edu$/i, :message => "You must have a valid harvard.edu or hbs.edu email address to register."
   
   # def membership_level
   #     membership.level

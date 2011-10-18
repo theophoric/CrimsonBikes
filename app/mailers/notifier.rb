@@ -10,6 +10,7 @@ class Notifier < ActionMailer::Base
     @instructions = @bike.location.instructions unless @bike.location.nil?
     mail(
       :to       => @user.email,
+      :bcc      => "cbreservations@gmail.com",
       :subject  => "CrimsonBikes Reservation Reminder and Unlock Code"
     )
   end
@@ -21,6 +22,7 @@ class Notifier < ActionMailer::Base
     @instructions = @bike.location.instructions unless @bike.location.nil?
     mail(
       :to       => @user.email,
+      :bcc      => "cbreservations@gmail.com",      
       :subject  => "CrimsonBikes Reservation Confirmation"
     )
   end
@@ -34,7 +36,7 @@ class Notifier < ActionMailer::Base
   def send_admin_unlock
     @unlock_code = UnlockCode.get_current
     mail(
-      :to       => "admin@crimsonbikes.org", 
+      :to       => "crimsonbikesmgr@gmail.com", 
       :subject  => "Current Crimsonbikes Unlock Code"
     )
   end
