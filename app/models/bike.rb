@@ -36,7 +36,10 @@ class Bike
   
   def reserve(reservation)
     #unless timeslot.where(:time.within => [start..stop], :date => date).any?
-    return false if timeslots.where(:date => reservation.date).and(:time.in => (reservation.start..reservation.stop).to_a).any?
+    if timeslots.where(:date => reservation.date).and(:time.in => (reservation.start..reservation.stop).to_a).any?
+      reservation.destroy
+      return false
+    end
     for time in ([(reservation.start - 1), 0].max..[(reservation.stop + 1), 96].min).to_a do
       self.timeslots.create(:time => time, :date => reservation.date, :reservation_id => reservation.id)
     end

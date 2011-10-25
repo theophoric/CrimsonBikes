@@ -19,4 +19,9 @@ class PagesController < ApplicationController
   def how_it_works
     
   end
+  
+  def locations
+    @locations = Location.all
+  end
+  
 end

@@ -1,8 +1,9 @@
-.slider-wrapper.theme-default.span-20.prepend-2.append-2.last.prepend-top.append-bottom
+.slider-wrapper.theme-default.span-24.last.prepend-top.append-bottom
   .ribbon
+  #corner_button.align-right= link_to (image_tag 'slider_images/20dollar_button80.png'), new_user_registration_path
   #slider.nivoSlider
-    - %w{ bg5 bg6 bg7 }.each do |bg|
-      = image_tag "slider_images/#{bg}.png", :size => "789x274", :title => "Welcome to Crimson Bikes"
+    - %w{ bg1 bg2 bg3 }.each do |bg|
+      = image_tag "slider_images/#{bg}.jpg", :size => "950x330", :title => "Welcome to Crimson Bikes"
 .span-24.prepend-top
   %ul.radio.align-center.prepend-top
     %li.large

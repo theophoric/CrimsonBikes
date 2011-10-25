@@ -13,6 +13,13 @@ a:visited{color:black;}
 a.active{color:#cc0001;}
 a:hover{color:#cc0001 !important;background-color:transparent !important;}
 
+#corner_button{
+	height:0px;
+	position:relative;
+	top:0px;
+	z-index:10;
+	opacity:0.8;
+}
 
 input[type=submit]{border:none;}
 .caption{background-color:#ccc;opacity:.6;color:black;height:40px;top:-40px;position:relative;}

@@ -6,22 +6,7 @@ jQuery.ajaxSetup({
 // // This file is automatically included by javascript_include_tag :defaults
 $(document).ready(function(){
  	$('.expandable').fancybox();
-
 	resetButtons();
-	$('.feedback-div').tabSlideOut({                     
-	tabHandle: '.handle',                   
-	pathToTabImage: '../images/FEEDBACK.jpg', 
-	imageHeight: '300px',                   
-	imageWidth: '40px',                     
-	tabLocation: 'left',                    
-	speed: 300,                             
-	action: 'click',                        
-	topPos: '200px',                        
-	leftPos: '20px',                        
-	fixedPosition: false                    
-	});
-
-	
 })
 // 
 

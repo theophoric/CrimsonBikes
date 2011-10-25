@@ -34,11 +34,27 @@
               = bike.location.name
             .span-4.last.unlock_code
               = unlock_code reservation
-          - unless reservation.expired?
-            .span-15.border-top.align-right.append-1.last
-              = link_to "Cancel Reservation", object_destroy_path("reservations", reservation), :confirm => "Are you sure you would like to cancel this reservation?"
+            .span-15.border-top.append-1.last
+              .span-8.flag_bike
+                - if (reservation.date == CbTime.today && reservation.start <= Time.zone.now.hour*2) || (reservation.date == CbTime.yesterday)
+                  = link_to "Flag Bike for Repair", "#", :onclick => "$('#ticket_bike_id').val('#{bike._id}');$('#flag_bike .bike_name').text('#{bike.name}');$('#flag_bike_link').click();"
+              - unless reservation.expired?
+                .span-7.last.cancel_reservation.align-right= link_to "Cancel Reservation", object_destroy_path("reservations", reservation), :confirm => "Are you sure you would like to cancel this reservation?"
           
 .hidden
+  #flag_bike.span-8
+    %h2.border-bottom
+      Flag "
+      %span.bike_name
+      " for Repair?
+    %p (Note that this will cancel your current reservation)
+    = form_for :ticket, :url => open_ticket_path do |f|
+      = f.hidden_field :bike_id
+      = f.label :open_note, "Reason for flagging:"
+      = f.text_area :open_note, :cols => 40
+      .align-center
+        = f.submit "Flag Bike", :confirm => "Are you sure you wish to flag the bike for repair? This will cancel your current reservation."
+  = link_to "Flag Bike", "#flag_bike", :id => "flag_bike_link"
   #unlock_code
   = link_to "View Unlock Code", '#unlock_code', :id => "unlock_code_link"
 :javascript
@@ -47,4 +63,5 @@
   filter_properties();
   $('.default_filter a').click();
   $('#unlock_code_link').fancybox();
+  $('#flag_bike_link').fancybox();
   });

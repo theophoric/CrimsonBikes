@@ -24,6 +24,13 @@ a:hover {
   color: #cc0001 !important;
   background-color: transparent !important; }
 
+#corner_button {
+  height: 0px;
+  position: relative;
+  top: 0px;
+  z-index: 10;
+  opacity: 0.8; }
+
 input[type=submit] {
   border: none; }
 

@@ -15,6 +15,9 @@ class Ticket
   field :_priority_level, :default => 5
   field :_status, :default => "open"
   
+  field :open_note, :default => ""
+  field :close_note, :default => ""
+  
   validates_inclusion_of :_priority_level, :in => 1..5
   validates_inclusion_of :_status, :in => %w{ open in_progress closed }
   

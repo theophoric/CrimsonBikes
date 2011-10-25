@@ -1,0 +1,16 @@
+- objects ||= @objects 
+%table
+  %tr
+    %th Bike
+    %th User
+    %th DateTime
+    %th Status
+    %th View
+  - for object in objects do
+    %tr[object]
+      %td= link_to object.bike.name, object_edit_path("bike", object.bike) if object.bike
+      %td= link_to object.user.fullname, object_edit_path("user", object.user) if object.user
+      %td= object.created_at
+      %td= object._status
+      %td= link_to "View Ticket", object_edit_path("ticket", object)
+      

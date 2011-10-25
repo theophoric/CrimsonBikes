@@ -1,13 +1,13 @@
 #about
-  #tabs.prepend-top
-    %ul
-      - @pages.each_with_index do |page, index|
-        %li.align-center= link_to page.title, "#tab-#{index}"
+  #accordion.prepend-top
     - @pages.each_with_index do |page, index|
+      %h3= link_to page.title, "#"
       %div{:id => "tab-#{index}"}
         = page.text.html_safe
 :javascript
   $(function(){
-  $('#tabs').tabs();
+  $('#accordion').accordion({
+  autoHeight:false
+  });
   })
   

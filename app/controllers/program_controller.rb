@@ -83,13 +83,15 @@ class ProgramController < ApplicationController
   def reserve
     message = {}
     if current_user.active?
-      if current_user.reservations.any_of({:date.gt => CbTime.today}, {:date => CbTime.today, :stop.gte => (Time.zone.now.hour * 2)}).none?
-        @reservation = Reservation.new(params[:reservation])
+      @reservation = Reservation.new(params[:reservation])
+      @bike = Bike.find(@reservation.bike._id)
+      if @bike.timeslots.where(:date => @reservation.date).and(:time.in => (@reservation.start..@reservation.stop).to_a).any?
+        message[:notice] = "There was an error with your request"
+      elsif current_user.reservations.any_of({:date.gt => CbTime.today}, {:date => CbTime.today, :stop.gte => (Time.zone.now.hour * 2)}).none?
         day_offset = params[:day_offset].to_i
         date = CbTime.today + day_offset.days
         @reservation.date = date
         @reservation.user_id = current_user._id
-        @bike = Bike.find(@reservation.bike._id)
         if @reservation.save! && @bike.reserve(@reservation)
           message[:notice] = "Your reservation was successful"
           confirmation = Notifier.reservation_confirmation(@reservation)
@@ -134,6 +136,32 @@ class ProgramController < ApplicationController
   def regenerate_combination
     @object = UnlockCode.find(params[:_id])
     @object.update_attribute(:combination, UnlockCode.generate_combination)
+  end
+  
+  def open_ticket
+    message = {}
+    bike = Bike.find(params[:ticket][:bike_id])
+    user = current_user
+    if user.admin? || bike.reservations.today.collect(&:user_id).include?(user._id) 
+      bike.reservations.where(:date.gte => CbTime.today).delete_all
+      bike.tickets.create(params[:ticket].merge(:user_id => user._id))
+      bike.update_attribute(:_status, "maintenance")
+      message[:notice]  = "This bike has been flagged for repair"
+      # Notice
+    else
+      message[:notice] = "There was an error"
+    end
+    redirect_to (object_index_path("reservations"), message)
+  end
+  
+  def close_ticket
+    message = {}
+    ticket = Ticket.find(params[:id])
+    bike = ticket.bike
+    bike.update_attribute(:_status, "operational")
+    ticket.update_attributes(params[:ticket].merge(:_status => "closed"))
+    message[:notice] = "Ticket Closed"
+    redirect_to (object_edit_path("ticket", ticket), message)
   end
   
   
