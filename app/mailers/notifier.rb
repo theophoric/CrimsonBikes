@@ -33,7 +33,7 @@ class Notifier < ActionMailer::Base
     mail(notice_options)
   end
   
-  def send_admin_notice(notice_options = {:subject => "Admin Notice"}, notice_body)
+  def send_admin_notice(notice_body,notice_options = {:subject => "Admin Notice"})
     @text = notice_body
     mail(notice_options.merge(:to => "crimsonbikesmgr@gmail.com"))
   end
