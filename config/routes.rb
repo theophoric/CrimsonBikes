@@ -15,6 +15,7 @@ Crimson2::Application.routes.draw do
   match 'blog'                          => 'pages#blog'               , :as => "blog"
   match 'howitworks'                    => 'pages#how_it_works'       , :as => "how_it_works"
   match 'locations'                     => 'pages#locations'          , :as => "locations"
+  match 'hello'                         => 'pages#hello'  , :as => 'hello'
   
   match 'bikes/reserve' => "program#reserve", :as => "create_reservation"
   

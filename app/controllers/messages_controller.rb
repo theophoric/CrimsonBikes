@@ -36,5 +36,7 @@ class MessagesController < ApplicationController
     redirect_to root_path
   end
   
-  
+  def hello
+    
+  end
 end
