@@ -2,7 +2,7 @@
 
 > CrimsonBikes is a nonprofit bikeshare organization that allows members of the Harvard community to check out wheels, *zipcar-style*.  
 
-[CrimsonBikes](http://www.crimsonbikes.org)
+[CrimsonBikes.org](http://www.crimsonbikes.org)
 
 ### Screenshots
 
